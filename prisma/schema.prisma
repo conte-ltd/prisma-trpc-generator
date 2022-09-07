@@ -4,6 +4,8 @@ generator client {
 
 generator trpc {
   provider       = "node ./lib/generator.js"
+  output         = "../example/src/generated"
+  baseRouterPath = "../../router"
 }
 
 datasource db {

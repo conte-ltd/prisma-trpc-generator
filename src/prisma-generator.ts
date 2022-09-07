@@ -3,18 +3,16 @@ import { getDMMF, parseEnvValue } from '@prisma/internals';
 import { promises as fs } from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
-import { generate as PrismaTrpcShieldGenerator } from 'prisma-trpc-shield-generator/lib/prisma-generator';
-import { generate as PrismaZodGenerator } from 'prisma-zod-generator/lib/prisma-generator';
+import { generate as PrismaZodGenerator } from '@conte-ltd/prisma-zod-generator/lib/prisma-generator';
 import { configSchema } from './config';
 import {
-  generateBaseRouter,
+  generateBaseRouterImport,
   generateCreateRouterImport,
   generateProcedure,
   generateRouterImport,
   generateRouterSchemaImports,
-  generateShieldImport,
   generatetRPCImport,
-  getInputTypeByOpName
+  getInputTypeByOpName,
 } from './helpers';
 import { project } from './project';
 import removeDir from './utils/removeDir';
@@ -29,27 +27,6 @@ export async function generate(options: GeneratorOptions) {
   await removeDir(outputDir, true);
   await PrismaZodGenerator(options);
 
-  let shieldOutputPath: string;
-  if (config.withShield) {
-    const outputPath = options.generator.output.value;
-    shieldOutputPath =
-      outputPath
-        .split(path.sep)
-        .slice(0, outputPath.split(path.sep).length - 1)
-        .join(path.sep) + '/shield';
-
-    await PrismaTrpcShieldGenerator({
-      ...options,
-      generator: {
-        ...options.generator,
-        output: {
-          ...options.generator.output,
-          value: shieldOutputPath,
-        },
-      },
-    });
-  }
-
   const prismaClientProvider = options.otherGenerators.find(
     (it) => parseEnvValue(it.provider) === 'prisma-client-js',
   );
@@ -58,23 +35,7 @@ export async function generate(options: GeneratorOptions) {
 
   const prismaClientDmmf = await getDMMF({
     datamodel: options.datamodel,
-    previewFeatures: prismaClientProvider.previewFeatures,
-  });
-
-  const createRouter = project.createSourceFile(
-    path.resolve(outputDir, 'routers', 'helpers', 'createRouter.ts'),
-    undefined,
-    { overwrite: true },
-  );
-
-  generatetRPCImport(createRouter);
-  if (config.withShield) {
-    generateShieldImport(createRouter, shieldOutputPath);
-  }
-  generateBaseRouter(createRouter, config);
-
-  createRouter.formatText({
-    indentSize: 2,
+    previewFeatures: prismaClientProvider?.previewFeatures,
   });
 
   const appRouter = project.createSourceFile(
@@ -83,11 +44,10 @@ export async function generate(options: GeneratorOptions) {
     { overwrite: true },
   );
 
-  generateCreateRouterImport(appRouter, config.withMiddleware);
+  generateBaseRouterImport(appRouter, config);
+
   appRouter.addStatements(/* ts */ `
-  export const appRouter = ${
-    config.withMiddleware ? 'createProtectedRouter' : 'createRouter'
-  }()`);
+  export const appRouter = ${config.baseRouterName}`);
 
   prismaClientDmmf.mappings.modelOperations.forEach((modelOperation) => {
     const { model, ...operations } = modelOperation;
@@ -100,7 +60,7 @@ export async function generate(options: GeneratorOptions) {
       { overwrite: true },
     );
 
-    generateCreateRouterImport(modelRouter, false);
+    generateCreateRouterImport(modelRouter, config);
     generateRouterSchemaImports(
       modelRouter,
       model,
@@ -113,7 +73,7 @@ export async function generate(options: GeneratorOptions) {
     for (const [opType, opNameWithModel] of Object.entries(operations)) {
       generateProcedure(
         modelRouter,
-        opNameWithModel,
+        opNameWithModel?.replace(model as string, ''),
         getInputTypeByOpName(opType, model),
         model,
         opType,

@@ -1,8 +1,8 @@
 {
-  "name": "prisma-trpc-generator",
-  "version": "0.4.3",
+  "name": "@conte-ltd/prisma-trpc-generator",
+  "version": "0.0.1",
   "description": "Prisma 2+ generator to emit fully implemented tRPC routers",
-  "repository": "https://github.com/omar-dulaimi/prisma-trpc-generator",
+  "repository": "https://github.com/conte-ltd/prisma-trpc-generator",
   "bin": {
     "prisma-trpc-generator": "lib/generator.js"
   },
@@ -11,8 +11,8 @@
     "package:publish": "./package.sh && cd package && npm publish"
   },
   "author": {
-    "name": "Omar Dulaimi",
-    "url": "https://github.com/omar-dulaimi"
+    "name": "CONTE, Ltd.",
+    "url": "https://github.com/conte-ltd"
   },
   "keywords": [
     "prisma",
@@ -26,26 +26,27 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@conte-ltd/prisma-zod-generator": "0.0.7",
     "@prisma/client": "^4.3.1",
     "@prisma/generator-helper": "^4.3.1",
     "@prisma/internals": "^4.3.1",
     "pluralize": "^8.0.0",
-    "prisma-trpc-shield-generator": "0.0.0-rc.4",
-    "prisma-zod-generator": "0.5.3",
     "ts-morph": "^16.0.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@trpc/server": "^9.27.2",
-    "@types/node": "^18.7.14",
+    "@types/node": "^18.7.15",
     "@types/pluralize": "^0.0.29",
     "prisma": "^4.3.1",
     "trpc-shield": "^0.1.1",
     "typescript": "^4.8.2"
   },
   "bugs": {
-    "url": "https://github.com/omar-dulaimi/prisma-trpc-generator/issues"
+    "url": "https://github.com/conte-ltd/prisma-trpc-generator/issues"
   },
-  "homepage": "https://github.com/omar-dulaimi/prisma-trpc-generator#readme",
-  "private": true
+  "homepage": "https://github.com/conte-ltd/prisma-trpc-generator#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }

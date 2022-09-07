@@ -4,13 +4,11 @@ import { uncapitalizeFirstLetter } from './utils/uncapitalizeFirstLetter';
 
 export const generateCreateRouterImport = (
   sourceFile: SourceFile,
-  isProtectedMiddleware: boolean,
+  config: Config,
 ) => {
   sourceFile.addImportDeclaration({
-    moduleSpecifier: './helpers/createRouter',
-    namedImports: [
-      isProtectedMiddleware ? 'createProtectedRouter' : 'createRouter',
-    ],
+    moduleSpecifier: config.baseRouterPath,
+    namedImports: ['createRouter'],
   });
 };
 
@@ -18,16 +16,6 @@ export const generatetRPCImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: '@trpc/server',
     namespaceImport: 'trpc',
-  });
-};
-
-export const generateShieldImport = (
-  sourceFile: SourceFile,
-  shieldOutputPath: string,
-) => {
-  sourceFile.addImportDeclaration({
-    moduleSpecifier: `${shieldOutputPath}/shield`,
-    namedImports: ['permissions'],
   });
 };
 
@@ -42,46 +30,25 @@ export const generateRouterImport = (
   });
 };
 
-export function generateBaseRouter(sourceFile: SourceFile, config: Config) {
-  sourceFile.addStatements(/* ts */ `
-  import { Context } from '${config.contextPath}';
-    
-  export function createRouter() {
-    return trpc.router<Context>();
-  }`);
-
-  const middlewares = [];
-  if (config.withMiddleware) {
-    middlewares.push(/* ts */ `
-    .middleware(({ ctx, next }) => {
-      console.log("inside middleware!")
-      return next();
-    })`);
-  }
-
-  if (config.withShield) {
-    middlewares.push(/* ts */ `
-    .middleware(permissions)`);
-  }
-
-  sourceFile.addStatements(/* ts */ `
-    export function createProtectedRouter() {
-      return trpc
-        .router<Context>()
-        ${middlewares.join('\r')};
-    }`);
+export function generateBaseRouterImport(
+  sourceFile: SourceFile,
+  config: Config,
+) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: config.baseRouterPath,
+    namedImports: [config.baseRouterName],
+  });
 }
 
 export function generateProcedure(
   sourceFile: SourceFile,
-  name: string,
-  typeName: string,
+  name: string | undefined,
+  typeName: string | undefined,
   modelName: string,
   opType: string,
 ) {
   let input = 'input';
-  const nameWithoutModel = name.replace(modelName as string, '');
-  switch (nameWithoutModel) {
+  switch (name) {
     case 'findUnique':
       input = '{ where: input.where }';
       break;
@@ -127,7 +94,7 @@ export function generateRouterSchemaImports(
   sourceFile: SourceFile,
   name: string,
   hasCreateMany: boolean,
-  provider: string
+  provider: string,
 ) {
   let statements = [
     `import { ${name}FindUniqueSchema } from "../schemas/findUnique${name}.schema";`,
@@ -152,13 +119,12 @@ export function generateRouterSchemaImports(
     `import { ${name}GroupBySchema } from "../schemas/groupBy${name}.schema";`,
   ]);
 
-  if(provider === "mongodb") {
+  if (provider === 'mongodb') {
     statements = statements.concat([
       `import { ${name}FindRawObjectSchema } from "../schemas/objects/${name}FindRaw.schema";`,
       `import { ${name}AggregateRawObjectSchema } from "../schemas/objects/${name}AggregateRaw.schema";`,
     ]);
   }
-
 
   sourceFile.addStatements(/* ts */ statements.join('\n'));
 }

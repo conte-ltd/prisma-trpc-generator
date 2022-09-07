@@ -71,10 +71,10 @@ Using yarn:
 
 ```prisma
 generator trpc {
-  provider       = "prisma-trpc-generator"
-  withMiddleware = false
-  withShield     = false
-  contextPath    = "../../../../src/context"
+  provider         = "prisma-trpc-generator"
+  baseRouterPath   = "../../../src/router"
+  baseRouterName   = "baseRouter"
+  createRouterName = "createRouter"
 }
 ```
 
@@ -120,21 +120,22 @@ will generate
 
 # Additional Options
 
-| Option           |  Description                                                 | Type      |  Default                  |
-| ---------------- | ------------------------------------------------------------ | --------- | ------------------------- |
-| `output`         | Output directory for the generated routers and zod schemas   | `string`  | `./generated`             |
-| `withMiddleware` | Attaches a global middleware that runs before all procedures | `boolean` | `true`                    |
-| `withShield`     | Generates a tRPC Shield to use as a permissions layer        | `boolean` | `true`                    |
-| `contextPath`    | Sets the context path used in your routers                   | `string`  | `../../../../src/context` |
+| Option             |  Description                                               | Type      |  Default                  |
+|--------------------|------------------------------------------------------------| --------- |---------------------------|
+| `output`           | Output directory for the generated routers and zod schemas | `string`  | `./generated`             |
+| `baseRouterPath`   | Sets the base router path used in your routers             | `string`  | `../../../../src/context` |
+| `baseRouterName`   | Sets the base router name used in your routers             | `string`  | `baseRouter`              |
+| `createRouterName` | Sets the create router name used in your routers           | `string`  | `createRouter`            |
 
-Use additional options in the `schema.prisma`
+Example of `bathRouter` and `createRouter`
 
-```prisma
-generator trpc {
-  provider       = "prisma-trpc-generator"
-  output         = "./trpc"
-  withMiddleware = false
-  withShield     = false
-  contextPath    = "../context"
-}
+```ts
+import * as trpc from '@trpc/server';
+import { Context } from './context';
+
+export const createRouter = () => {
+  return trpc.router<Context>();
+};
+
+export const baseRouter = createRouter();
 ```

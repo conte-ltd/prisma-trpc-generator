@@ -5,9 +5,9 @@ const configBoolean = z
   .transform((arg) => JSON.parse(arg));
 
 export const configSchema = z.object({
-  withMiddleware: configBoolean.default('true'),
-  withShield: configBoolean.default('true'),
-  contextPath: z.string().default("../../../../src/context")
+  baseRouterPath: z.string().default('../../../src/router'),
+  baseRouterName: z.string().default('baseRouter'),
+  createRouterName: z.string().default('createRouter'),
 });
 
 export type Config = z.infer<typeof configSchema>;

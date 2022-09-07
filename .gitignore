@@ -2,5 +2,8 @@ node_modules
 lib
 package
 npm-debug.log*
-prisma/generated
+src/generated
 prisma/shield
+.idea
+.vscode
+.DS_Store
