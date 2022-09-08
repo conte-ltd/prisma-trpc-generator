@@ -26,7 +26,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@conte-ltd/prisma-zod-generator": "0.0.7",
     "@prisma/client": "^4.3.1",
     "@prisma/generator-helper": "^4.3.1",
     "@prisma/internals": "^4.3.1",
@@ -35,12 +34,16 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@conte-ltd/prisma-zod-generator": "0.0.7",
     "@trpc/server": "^9.27.2",
     "@types/node": "^18.7.15",
     "@types/pluralize": "^0.0.29",
     "prisma": "^4.3.1",
     "trpc-shield": "^0.1.1",
     "typescript": "^4.8.2"
+  },
+  "peerDependencies": {
+    "@conte-ltd/prisma-zod-generator": ">=0.0.7"
   },
   "bugs": {
     "url": "https://github.com/conte-ltd/prisma-trpc-generator/issues"

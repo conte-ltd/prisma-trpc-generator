@@ -1,33 +1,26 @@
 [![npm version](https://badge.fury.io/js/prisma-trpc-generator.svg)](https://badge.fury.io/js/prisma-trpc-generator)
 [![npm](https://img.shields.io/npm/dt/prisma-trpc-generator.svg)](https://www.npmjs.com/package/prisma-trpc-generator)
-[![HitCount](https://hits.dwyl.com/omar-dulaimi/prisma-trpc-generator.svg?style=flat)](http://hits.dwyl.com/omar-dulaimi/prisma-trpc-generator)
+[![HitCount](https://hits.dwyl.com/conte-ltd/prisma-trpc-generator.svg?style=flat)](http://hits.dwyl.com/conte-ltd/prisma-trpc-generator)
 [![npm](https://img.shields.io/npm/l/prisma-trpc-generator.svg)](LICENSE)
 
 
 
 <p align="center">
-  <a href="https://github.com/omar-dulaimi/prisma-trpc-generator">
-    <img src="https://raw.githubusercontent.com/omar-dulaimi/prisma-trpc-generator/master/logo.png" alt="Logo" width="200" height="200">
+  <a href="https://github.com/conte-ltd/prisma-trpc-generator">
+    <img src="https://raw.githubusercontent.com/conte-ltd/prisma-trpc-generator/master/logo.png" alt="Logo" width="200" height="200">
   </a>
   <h3 align="center">Prisma tRPC Generator</h3>
   <p align="center">
     A Prisma generator that automates creating your tRPC routers from your Prisma schema.
     <br />
-    <a href="https://github.com/omar-dulaimi/prisma-trpc-generator#additional-options"><strong>Explore the options »</strong></a>
+    <a href="https://github.com/conte-ltd/prisma-trpc-generator#additional-options"><strong>Explore the options »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/omar-dulaimi/prisma-trpc-generator/issues/new?template=bug_report.yml">Report Bug</a>
+    <a href="https://github.com/conte-ltd/prisma-trpc-generator/issues/new?template=bug_report.yml">Report Bug</a>
     ·
-    <a href="https://github.com/omar-dulaimi/prisma-trpc-generator/issues/new?template=feature_request.md">Request Feature</a>
+    <a href="https://github.com/conte-ltd/prisma-trpc-generator/issues/new?template=feature_request.md">Request Feature</a>
   </p>
 </p>
-
-<p align="center">
-  <a href="https://www.buymeacoffee.com/omardulaimi">
-    <img src="https://cdn.buymeacoffee.com/buttons/default-black.png" alt="Buy Me A Coffee" height="41" width="174">
-  </a>
-</p>
-
 
 
 ## Table of Contents
@@ -54,13 +47,13 @@ Automatically generate fully implemented tRPC routers from your [Prisma](https:/
 Using npm:
 
 ```bash
- npm install prisma-trpc-generator
+ npm install @conte-ltd/prisma-trpc-generator @conte-ltd/prisma-zod-generator
 ```
 
 Using yarn:
 
 ```bash
- yarn add prisma-trpc-generator
+ yarn add @conte-ltd/prisma-trpc-generator @conte-ltd/prisma-zod-generator
 ```
 
 # Usage
@@ -114,7 +107,7 @@ model Post {
 
 will generate
 
-![tRPC Routers](https://raw.githubusercontent.com/omar-dulaimi/prisma-trpc-generator/master/trpcRouters.png)
+![tRPC Routers](https://raw.githubusercontent.com/conte-ltd/prisma-trpc-generator/master/trpcRouters.png)
 
 5- Make sure you have a valid `Context` file, as specified in `contextPath` option. The official [tRPC docs](https://trpc.io/docs/context) for reference.
 

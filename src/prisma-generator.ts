@@ -11,7 +11,6 @@ import {
   generateProcedure,
   generateRouterImport,
   generateRouterSchemaImports,
-  generatetRPCImport,
   getInputTypeByOpName,
 } from './helpers';
 import { project } from './project';
