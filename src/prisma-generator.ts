@@ -15,6 +15,7 @@ import {
 } from './helpers';
 import { project } from './project';
 import removeDir from './utils/removeDir';
+import { uncapitalizeFirstLetter } from './utils/uncapitalizeFirstLetter';
 
 export async function generate(options: GeneratorOptions) {
   const outputDir = parseEnvValue(options.generator.output as EnvValue);
@@ -80,7 +81,7 @@ export async function generate(options: GeneratorOptions) {
     }
     modelRouter.formatText({ indentSize: 2 });
     appRouter.addStatements(/* ts */ `
-    .merge('${model.toLowerCase()}.', ${plural}Router)`);
+    .merge('${uncapitalizeFirstLetter(model)}.', ${plural}Router)`);
   });
 
   appRouter.formatText({ indentSize: 2 });
