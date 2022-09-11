@@ -47,44 +47,13 @@ export function generateProcedure(
   modelName: string,
   opType: string,
 ) {
-  let input = 'input';
-  switch (name) {
-    case 'findUnique':
-      input = '{ where: input.where }';
-      break;
-    case 'findFirst':
-    case 'findMany':
-      break;
-    case 'deleteOne':
-      input = '{ where: input.where }';
-      break;
-    case 'deleteMany':
-    case 'updateMany':
-    case 'aggregate':
-      break;
-    case 'groupBy':
-      input =
-        '{ where: input.where, orderBy: input.orderBy, by: input.by, having: input.having, take: input.take, skip: input.skip }';
-      break;
-    case 'createOne':
-    case 'createMany':
-      input = '{ data: input.data }';
-      break;
-    case 'updateOne':
-      input = '{ where: input.where, data: input.data }';
-      break;
-    case 'upsertOne':
-      input =
-        '{ where: input.where, create: input.create, update: input.update }';
-      break;
-  }
   sourceFile.addStatements(/* ts */ `
   .${getProcedureTypeByOpName(opType)}("${name}", {
     input: ${typeName},
     async resolve({ ctx, input }) {
       const ${name} = await ctx.prisma.${uncapitalizeFirstLetter(
     modelName,
-  )}.${opType.replace('One', '')}(${input});
+  )}.${opType.replace('One', '')}(input);
       return ${name};
     },
   })`);

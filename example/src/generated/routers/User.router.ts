@@ -24,7 +24,7 @@ export const usersRouter = createRouter()
   .mutation("createOne", {
     input: UserCreateOneSchema,
     async resolve({ ctx, input }) {
-      const createOne = await ctx.prisma.user.create({ data: input.data });
+      const createOne = await ctx.prisma.user.create(input);
       return createOne;
     },
   })
@@ -40,7 +40,7 @@ export const usersRouter = createRouter()
   .mutation("deleteOne", {
     input: UserDeleteOneSchema,
     async resolve({ ctx, input }) {
-      const deleteOne = await ctx.prisma.user.delete({ where: input.where });
+      const deleteOne = await ctx.prisma.user.delete(input);
       return deleteOne;
     },
   })
@@ -64,7 +64,7 @@ export const usersRouter = createRouter()
   .query("findUnique", {
     input: UserFindUniqueSchema,
     async resolve({ ctx, input }) {
-      const findUnique = await ctx.prisma.user.findUnique({ where: input.where });
+      const findUnique = await ctx.prisma.user.findUnique(input);
       return findUnique;
     },
   })
@@ -72,7 +72,7 @@ export const usersRouter = createRouter()
   .query("groupBy", {
     input: UserGroupBySchema,
     async resolve({ ctx, input }) {
-      const groupBy = await ctx.prisma.user.groupBy({ where: input.where, orderBy: input.orderBy, by: input.by, having: input.having, take: input.take, skip: input.skip });
+      const groupBy = await ctx.prisma.user.groupBy(input);
       return groupBy;
     },
   })
@@ -88,7 +88,7 @@ export const usersRouter = createRouter()
   .mutation("updateOne", {
     input: UserUpdateOneSchema,
     async resolve({ ctx, input }) {
-      const updateOne = await ctx.prisma.user.update({ where: input.where, data: input.data });
+      const updateOne = await ctx.prisma.user.update(input);
       return updateOne;
     },
   })
@@ -96,7 +96,7 @@ export const usersRouter = createRouter()
   .mutation("upsertOne", {
     input: UserUpsertSchema,
     async resolve({ ctx, input }) {
-      const upsertOne = await ctx.prisma.user.upsert({ where: input.where, create: input.create, update: input.update });
+      const upsertOne = await ctx.prisma.user.upsert(input);
       return upsertOne;
     },
   })
