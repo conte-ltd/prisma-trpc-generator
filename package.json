@@ -7,7 +7,6 @@
     "prisma-trpc-generator": "lib/generator.js"
   },
   "scripts": {
-    "postinstall": "npx prisma generate",
     "start": "tsc && npx prisma generate",
     "package:publish": "./package.sh && cd package && npm publish"
   },
