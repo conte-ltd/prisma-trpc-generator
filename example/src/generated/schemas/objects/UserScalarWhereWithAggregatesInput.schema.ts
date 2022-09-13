@@ -1,10 +1,11 @@
-import { z } from 'zod';
-import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.schema';
-import { StringWithAggregatesFilterObjectSchema } from './StringWithAggregatesFilter.schema';
-import { StringNullableWithAggregatesFilterObjectSchema } from './StringNullableWithAggregatesFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntWithAggregatesFilterObjectSchema,
+  StringWithAggregatesFilterObjectSchema,
+  StringNullableWithAggregatesFilterObjectSchema,
+} from './index';
 export const UserScalarWhereWithAggregatesInputObjectSchemaBase = z
   .object({
     AND: z
@@ -38,6 +39,5 @@ export const UserScalarWhereWithAggregatesInputObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const UserScalarWhereWithAggregatesInputObjectSchema: z.ZodType<Prisma.UserScalarWhereWithAggregatesInput> =
   UserScalarWhereWithAggregatesInputObjectSchemaBase;

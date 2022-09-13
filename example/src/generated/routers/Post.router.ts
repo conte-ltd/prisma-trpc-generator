@@ -1,20 +1,10 @@
 import { createRouter } from "../../router";
-import { PostFindUniqueSchema } from "../schemas/findUniquePost.schema";
-import { PostFindFirstSchema } from "../schemas/findFirstPost.schema";
-import { PostFindManySchema } from "../schemas/findManyPost.schema";
-import { PostCreateOneSchema } from "../schemas/createOnePost.schema";
-import { PostDeleteOneSchema } from "../schemas/deleteOnePost.schema";
-import { PostUpdateOneSchema } from "../schemas/updateOnePost.schema";
-import { PostDeleteManySchema } from "../schemas/deleteManyPost.schema";
-import { PostUpdateManySchema } from "../schemas/updateManyPost.schema";
-import { PostUpsertSchema } from "../schemas/upsertOnePost.schema";
-import { PostAggregateSchema } from "../schemas/aggregatePost.schema";
-import { PostGroupBySchema } from "../schemas/groupByPost.schema";
+import { FindUniquePostSchema, FindFirstPostSchema, FindManyPostSchema, CreateOnePostSchema, DeleteOnePostSchema, UpdateOnePostSchema, DeleteManyPostSchema, UpdateManyPostSchema, UpsertOnePostSchema, AggregatePostSchema, GroupByPostSchema } from "../schemas";
 
 export const postsRouter = createRouter()
 
   .query("aggregate", {
-    input: PostAggregateSchema,
+    input: AggregatePostSchema,
     async resolve({ ctx, input }) {
       const aggregate = await ctx.prisma.post.aggregate(input);
       return aggregate;
@@ -22,7 +12,7 @@ export const postsRouter = createRouter()
   })
 
   .mutation("createOne", {
-    input: PostCreateOneSchema,
+    input: CreateOnePostSchema,
     async resolve({ ctx, input }) {
       const createOne = await ctx.prisma.post.create(input);
       return createOne;
@@ -30,7 +20,7 @@ export const postsRouter = createRouter()
   })
 
   .mutation("deleteMany", {
-    input: PostDeleteManySchema,
+    input: DeleteManyPostSchema,
     async resolve({ ctx, input }) {
       const deleteMany = await ctx.prisma.post.deleteMany(input);
       return deleteMany;
@@ -38,7 +28,7 @@ export const postsRouter = createRouter()
   })
 
   .mutation("deleteOne", {
-    input: PostDeleteOneSchema,
+    input: DeleteOnePostSchema,
     async resolve({ ctx, input }) {
       const deleteOne = await ctx.prisma.post.delete(input);
       return deleteOne;
@@ -46,7 +36,7 @@ export const postsRouter = createRouter()
   })
 
   .query("findFirst", {
-    input: PostFindFirstSchema,
+    input: FindFirstPostSchema,
     async resolve({ ctx, input }) {
       const findFirst = await ctx.prisma.post.findFirst(input);
       return findFirst;
@@ -54,7 +44,7 @@ export const postsRouter = createRouter()
   })
 
   .query("findMany", {
-    input: PostFindManySchema,
+    input: FindManyPostSchema,
     async resolve({ ctx, input }) {
       const findMany = await ctx.prisma.post.findMany(input);
       return findMany;
@@ -62,7 +52,7 @@ export const postsRouter = createRouter()
   })
 
   .query("findUnique", {
-    input: PostFindUniqueSchema,
+    input: FindUniquePostSchema,
     async resolve({ ctx, input }) {
       const findUnique = await ctx.prisma.post.findUnique(input);
       return findUnique;
@@ -70,7 +60,7 @@ export const postsRouter = createRouter()
   })
 
   .query("groupBy", {
-    input: PostGroupBySchema,
+    input: GroupByPostSchema,
     async resolve({ ctx, input }) {
       const groupBy = await ctx.prisma.post.groupBy(input);
       return groupBy;
@@ -78,7 +68,7 @@ export const postsRouter = createRouter()
   })
 
   .mutation("updateMany", {
-    input: PostUpdateManySchema,
+    input: UpdateManyPostSchema,
     async resolve({ ctx, input }) {
       const updateMany = await ctx.prisma.post.updateMany(input);
       return updateMany;
@@ -86,7 +76,7 @@ export const postsRouter = createRouter()
   })
 
   .mutation("updateOne", {
-    input: PostUpdateOneSchema,
+    input: UpdateOnePostSchema,
     async resolve({ ctx, input }) {
       const updateOne = await ctx.prisma.post.update(input);
       return updateOne;
@@ -94,7 +84,7 @@ export const postsRouter = createRouter()
   })
 
   .mutation("upsertOne", {
-    input: PostUpsertSchema,
+    input: UpsertOnePostSchema,
     async resolve({ ctx, input }) {
       const upsertOne = await ctx.prisma.post.upsert(input);
       return upsertOne;

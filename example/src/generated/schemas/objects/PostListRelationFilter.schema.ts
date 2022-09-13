@@ -1,8 +1,7 @@
-import { z } from 'zod';
-import { PostWhereInputObjectSchema } from './PostWhereInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import { PostWhereInputObjectSchema } from './index';
 export const PostListRelationFilterObjectSchemaBase = z
   .object({
     every: z.lazy(() => PostWhereInputObjectSchema).optional(),
@@ -10,6 +9,5 @@ export const PostListRelationFilterObjectSchemaBase = z
     none: z.lazy(() => PostWhereInputObjectSchema).optional(),
   })
   .strict();
-
 export const PostListRelationFilterObjectSchema: z.ZodType<Prisma.PostListRelationFilter> =
   PostListRelationFilterObjectSchemaBase;

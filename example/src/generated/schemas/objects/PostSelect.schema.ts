@@ -1,6 +1,7 @@
-import { z } from 'zod';
-import { UserArgsObjectSchema } from './UserArgs.schema';
 import type { Prisma } from '@prisma/client';
+import { z } from 'zod';
+import '../index';
+import { UserArgsObjectSchema } from './index';
 
 export const PostSelectObjectSchemaBase = z.object({
   id: z.boolean().optional(),
@@ -13,6 +14,5 @@ export const PostSelectObjectSchemaBase = z.object({
   author: z.union([z.lazy(() => UserArgsObjectSchema), z.boolean()]).optional(),
   authorId: z.boolean().optional(),
 });
-
 export const PostSelectObjectSchema: z.ZodType<Prisma.PostSelect> =
   PostSelectObjectSchemaBase;

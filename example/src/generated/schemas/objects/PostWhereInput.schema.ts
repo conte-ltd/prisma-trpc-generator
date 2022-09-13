@@ -1,15 +1,16 @@
-import { z } from 'zod';
-import { IntFilterObjectSchema } from './IntFilter.schema';
-import { DateTimeFilterObjectSchema } from './DateTimeFilter.schema';
-import { StringFilterObjectSchema } from './StringFilter.schema';
-import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
-import { BoolFilterObjectSchema } from './BoolFilter.schema';
-import { UserRelationFilterObjectSchema } from './UserRelationFilter.schema';
-import { UserWhereInputObjectSchema } from './UserWhereInput.schema';
-import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntFilterObjectSchema,
+  DateTimeFilterObjectSchema,
+  StringFilterObjectSchema,
+  StringNullableFilterObjectSchema,
+  BoolFilterObjectSchema,
+  UserRelationFilterObjectSchema,
+  UserWhereInputObjectSchema,
+  IntNullableFilterObjectSchema,
+} from './index';
 export const PostWhereInputObjectSchemaBase = z
   .object({
     AND: z
@@ -61,6 +62,5 @@ export const PostWhereInputObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const PostWhereInputObjectSchema: z.ZodType<Prisma.PostWhereInput> =
   PostWhereInputObjectSchemaBase;

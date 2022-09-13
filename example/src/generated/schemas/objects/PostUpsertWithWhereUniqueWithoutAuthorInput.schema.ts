@@ -1,12 +1,13 @@
-import { z } from 'zod';
-import { PostWhereUniqueInputObjectSchema } from './PostWhereUniqueInput.schema';
-import { PostUpdateWithoutAuthorInputObjectSchema } from './PostUpdateWithoutAuthorInput.schema';
-import { PostUncheckedUpdateWithoutAuthorInputObjectSchema } from './PostUncheckedUpdateWithoutAuthorInput.schema';
-import { PostCreateWithoutAuthorInputObjectSchema } from './PostCreateWithoutAuthorInput.schema';
-import { PostUncheckedCreateWithoutAuthorInputObjectSchema } from './PostUncheckedCreateWithoutAuthorInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  PostWhereUniqueInputObjectSchema,
+  PostUpdateWithoutAuthorInputObjectSchema,
+  PostUncheckedUpdateWithoutAuthorInputObjectSchema,
+  PostCreateWithoutAuthorInputObjectSchema,
+  PostUncheckedCreateWithoutAuthorInputObjectSchema,
+} from './index';
 export const PostUpsertWithWhereUniqueWithoutAuthorInputObjectSchemaBase = z
   .object({
     where: z.lazy(() => PostWhereUniqueInputObjectSchema),
@@ -20,6 +21,5 @@ export const PostUpsertWithWhereUniqueWithoutAuthorInputObjectSchemaBase = z
     ]),
   })
   .strict();
-
 export const PostUpsertWithWhereUniqueWithoutAuthorInputObjectSchema: z.ZodType<Prisma.PostUpsertWithWhereUniqueWithoutAuthorInput> =
   PostUpsertWithWhereUniqueWithoutAuthorInputObjectSchemaBase;

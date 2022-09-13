@@ -1,11 +1,12 @@
-import { z } from 'zod';
-import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
-import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
-import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-import { PostUncheckedUpdateManyWithoutAuthorNestedInputObjectSchema } from './PostUncheckedUpdateManyWithoutAuthorNestedInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntFieldUpdateOperationsInputObjectSchema,
+  StringFieldUpdateOperationsInputObjectSchema,
+  NullableStringFieldUpdateOperationsInputObjectSchema,
+  PostUncheckedUpdateManyWithoutAuthorNestedInputObjectSchema,
+} from './index';
 export const UserUncheckedUpdateInputObjectSchemaBase = z
   .object({
     id: z
@@ -32,6 +33,5 @@ export const UserUncheckedUpdateInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const UserUncheckedUpdateInputObjectSchema: z.ZodType<Prisma.UserUncheckedUpdateInput> =
   UserUncheckedUpdateInputObjectSchemaBase;

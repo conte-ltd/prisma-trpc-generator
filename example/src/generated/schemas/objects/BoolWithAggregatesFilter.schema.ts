@@ -1,10 +1,11 @@
-import { z } from 'zod';
-import { NestedBoolWithAggregatesFilterObjectSchema } from './NestedBoolWithAggregatesFilter.schema';
-import { NestedIntFilterObjectSchema } from './NestedIntFilter.schema';
-import { NestedBoolFilterObjectSchema } from './NestedBoolFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  NestedBoolWithAggregatesFilterObjectSchema,
+  NestedIntFilterObjectSchema,
+  NestedBoolFilterObjectSchema,
+} from './index';
 export const BoolWithAggregatesFilterObjectSchemaBase = z
   .object({
     equals: z.boolean().optional(),
@@ -19,6 +20,5 @@ export const BoolWithAggregatesFilterObjectSchemaBase = z
     _max: z.lazy(() => NestedBoolFilterObjectSchema).optional(),
   })
   .strict();
-
 export const BoolWithAggregatesFilterObjectSchema: z.ZodType<Prisma.BoolWithAggregatesFilter> =
   BoolWithAggregatesFilterObjectSchemaBase;

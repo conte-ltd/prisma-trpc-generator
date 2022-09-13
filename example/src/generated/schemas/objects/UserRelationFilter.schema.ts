@@ -1,8 +1,7 @@
-import { z } from 'zod';
-import { UserWhereInputObjectSchema } from './UserWhereInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import { UserWhereInputObjectSchema } from './index';
 export const UserRelationFilterObjectSchemaBase = z
   .object({
     is: z
@@ -15,6 +14,5 @@ export const UserRelationFilterObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const UserRelationFilterObjectSchema: z.ZodType<Prisma.UserRelationFilter> =
   UserRelationFilterObjectSchemaBase;

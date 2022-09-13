@@ -1,9 +1,10 @@
-import { z } from 'zod';
-import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
-import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  StringFieldUpdateOperationsInputObjectSchema,
+  NullableStringFieldUpdateOperationsInputObjectSchema,
+} from './index';
 export const UserUpdateManyMutationInputObjectSchemaBase = z
   .object({
     email: z
@@ -21,6 +22,5 @@ export const UserUpdateManyMutationInputObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const UserUpdateManyMutationInputObjectSchema: z.ZodType<Prisma.UserUpdateManyMutationInput> =
   UserUpdateManyMutationInputObjectSchemaBase;

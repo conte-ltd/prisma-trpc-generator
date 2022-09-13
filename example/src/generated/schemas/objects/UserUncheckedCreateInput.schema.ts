@@ -1,8 +1,7 @@
-import { z } from 'zod';
-import { PostUncheckedCreateNestedManyWithoutAuthorInputObjectSchema } from './PostUncheckedCreateNestedManyWithoutAuthorInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import { PostUncheckedCreateNestedManyWithoutAuthorInputObjectSchema } from './index';
 export const UserUncheckedCreateInputObjectSchemaBase = z
   .object({
     id: z.number().optional(),
@@ -13,6 +12,5 @@ export const UserUncheckedCreateInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const UserUncheckedCreateInputObjectSchema: z.ZodType<Prisma.UserUncheckedCreateInput> =
   UserUncheckedCreateInputObjectSchemaBase;

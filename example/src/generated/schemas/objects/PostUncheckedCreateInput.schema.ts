@@ -1,7 +1,7 @@
-import { z } from 'zod';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import './index';
 export const PostUncheckedCreateInputObjectSchemaBase = z
   .object({
     id: z.number().optional(),
@@ -14,6 +14,5 @@ export const PostUncheckedCreateInputObjectSchemaBase = z
     authorId: z.number().optional().nullable(),
   })
   .strict();
-
 export const PostUncheckedCreateInputObjectSchema: z.ZodType<Prisma.PostUncheckedCreateInput> =
   PostUncheckedCreateInputObjectSchemaBase;

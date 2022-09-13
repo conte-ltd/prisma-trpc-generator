@@ -1,10 +1,11 @@
-import { z } from 'zod';
-import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
-import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-import { PostUpdateManyWithoutAuthorNestedInputObjectSchema } from './PostUpdateManyWithoutAuthorNestedInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  StringFieldUpdateOperationsInputObjectSchema,
+  NullableStringFieldUpdateOperationsInputObjectSchema,
+  PostUpdateManyWithoutAuthorNestedInputObjectSchema,
+} from './index';
 export const UserUpdateInputObjectSchemaBase = z
   .object({
     email: z
@@ -25,6 +26,5 @@ export const UserUpdateInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const UserUpdateInputObjectSchema: z.ZodType<Prisma.UserUpdateInput> =
   UserUpdateInputObjectSchemaBase;

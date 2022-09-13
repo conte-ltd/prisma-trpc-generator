@@ -1,10 +1,11 @@
-import { z } from 'zod';
-import { UserWhereUniqueInputObjectSchema } from './UserWhereUniqueInput.schema';
-import { UserCreateWithoutPostsInputObjectSchema } from './UserCreateWithoutPostsInput.schema';
-import { UserUncheckedCreateWithoutPostsInputObjectSchema } from './UserUncheckedCreateWithoutPostsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  UserWhereUniqueInputObjectSchema,
+  UserCreateWithoutPostsInputObjectSchema,
+  UserUncheckedCreateWithoutPostsInputObjectSchema,
+} from './index';
 export const UserCreateOrConnectWithoutPostsInputObjectSchemaBase = z
   .object({
     where: z.lazy(() => UserWhereUniqueInputObjectSchema),
@@ -14,6 +15,5 @@ export const UserCreateOrConnectWithoutPostsInputObjectSchemaBase = z
     ]),
   })
   .strict();
-
 export const UserCreateOrConnectWithoutPostsInputObjectSchema: z.ZodType<Prisma.UserCreateOrConnectWithoutPostsInput> =
   UserCreateOrConnectWithoutPostsInputObjectSchemaBase;

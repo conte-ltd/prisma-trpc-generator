@@ -1,10 +1,11 @@
-import { z } from 'zod';
-import { PostScalarWhereInputObjectSchema } from './PostScalarWhereInput.schema';
-import { PostUpdateManyMutationInputObjectSchema } from './PostUpdateManyMutationInput.schema';
-import { PostUncheckedUpdateManyWithoutPostsInputObjectSchema } from './PostUncheckedUpdateManyWithoutPostsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  PostScalarWhereInputObjectSchema,
+  PostUpdateManyMutationInputObjectSchema,
+  PostUncheckedUpdateManyWithoutPostsInputObjectSchema,
+} from './index';
 export const PostUpdateManyWithWhereWithoutAuthorInputObjectSchemaBase = z
   .object({
     where: z.lazy(() => PostScalarWhereInputObjectSchema),
@@ -14,6 +15,5 @@ export const PostUpdateManyWithWhereWithoutAuthorInputObjectSchemaBase = z
     ]),
   })
   .strict();
-
 export const PostUpdateManyWithWhereWithoutAuthorInputObjectSchema: z.ZodType<Prisma.PostUpdateManyWithWhereWithoutAuthorInput> =
   PostUpdateManyWithWhereWithoutAuthorInputObjectSchemaBase;

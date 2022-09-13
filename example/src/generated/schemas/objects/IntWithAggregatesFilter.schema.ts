@@ -1,10 +1,11 @@
-import { z } from 'zod';
-import { NestedIntWithAggregatesFilterObjectSchema } from './NestedIntWithAggregatesFilter.schema';
-import { NestedIntFilterObjectSchema } from './NestedIntFilter.schema';
-import { NestedFloatFilterObjectSchema } from './NestedFloatFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  NestedIntWithAggregatesFilterObjectSchema,
+  NestedIntFilterObjectSchema,
+  NestedFloatFilterObjectSchema,
+} from './index';
 export const IntWithAggregatesFilterObjectSchemaBase = z
   .object({
     equals: z.number().optional(),
@@ -27,6 +28,5 @@ export const IntWithAggregatesFilterObjectSchemaBase = z
     _max: z.lazy(() => NestedIntFilterObjectSchema).optional(),
   })
   .strict();
-
 export const IntWithAggregatesFilterObjectSchema: z.ZodType<Prisma.IntWithAggregatesFilter> =
   IntWithAggregatesFilterObjectSchemaBase;

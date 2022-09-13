@@ -1,8 +1,7 @@
-import { z } from 'zod';
-import { NestedBoolFilterObjectSchema } from './NestedBoolFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import { NestedBoolFilterObjectSchema } from './index';
 export const BoolFilterObjectSchemaBase = z
   .object({
     equals: z.boolean().optional(),
@@ -11,6 +10,5 @@ export const BoolFilterObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const BoolFilterObjectSchema: z.ZodType<Prisma.BoolFilter> =
   BoolFilterObjectSchemaBase;

@@ -1,11 +1,12 @@
-import { z } from 'zod';
-import { IntFilterObjectSchema } from './IntFilter.schema';
-import { StringFilterObjectSchema } from './StringFilter.schema';
-import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
-import { PostListRelationFilterObjectSchema } from './PostListRelationFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntFilterObjectSchema,
+  StringFilterObjectSchema,
+  StringNullableFilterObjectSchema,
+  PostListRelationFilterObjectSchema,
+} from './index';
 export const UserWhereInputObjectSchemaBase = z
   .object({
     AND: z
@@ -35,6 +36,5 @@ export const UserWhereInputObjectSchemaBase = z
     posts: z.lazy(() => PostListRelationFilterObjectSchema).optional(),
   })
   .strict();
-
 export const UserWhereInputObjectSchema: z.ZodType<Prisma.UserWhereInput> =
   UserWhereInputObjectSchemaBase;

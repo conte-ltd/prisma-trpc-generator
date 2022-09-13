@@ -23,15 +23,16 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@conte-ltd/prisma-zod-generator@0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@conte-ltd/prisma-zod-generator/-/prisma-zod-generator-0.0.7.tgz#c87039b4b1c38ea2c3da296bdad1c8beea27c4cd"
-  integrity sha512-lFKnhgvbYX/fh5fCIlqc6lI8Egc/LWMpA7bOtyEWJH0FjS7bzbINiRQfcQh1prRsVZFRiU88h+42pgtUpbDofw==
+"@conte-ltd/prisma-zod-generator@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@conte-ltd/prisma-zod-generator/-/prisma-zod-generator-0.0.10.tgz#8ee6b23c2a3245767ae16676856bc466d49ff32a"
+  integrity sha512-H+YNsGhGJMT718CVT0RIn6U5c4/jq6Z1rq09J2EVwWI22/YVbbv+hH2OQPBeCw3c+HvaH9xzUcMiAJBfibWSIg==
   dependencies:
     "@prisma/client" "^4.3.1"
     "@prisma/generator-helper" "^4.3.1"
     "@prisma/internals" "^4.3.1"
     prettier "^2.7.1"
+    ts-morph "^16.0.0"
     tslib "^2.4.0"
     zod "^3.19.0"
 

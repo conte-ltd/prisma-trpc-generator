@@ -1,13 +1,14 @@
-import { z } from 'zod';
-import { IntFilterObjectSchema } from './IntFilter.schema';
-import { DateTimeFilterObjectSchema } from './DateTimeFilter.schema';
-import { StringFilterObjectSchema } from './StringFilter.schema';
-import { StringNullableFilterObjectSchema } from './StringNullableFilter.schema';
-import { BoolFilterObjectSchema } from './BoolFilter.schema';
-import { IntNullableFilterObjectSchema } from './IntNullableFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntFilterObjectSchema,
+  DateTimeFilterObjectSchema,
+  StringFilterObjectSchema,
+  StringNullableFilterObjectSchema,
+  BoolFilterObjectSchema,
+  IntNullableFilterObjectSchema,
+} from './index';
 export const PostScalarWhereInputObjectSchemaBase = z
   .object({
     AND: z
@@ -52,6 +53,5 @@ export const PostScalarWhereInputObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const PostScalarWhereInputObjectSchema: z.ZodType<Prisma.PostScalarWhereInput> =
   PostScalarWhereInputObjectSchemaBase;

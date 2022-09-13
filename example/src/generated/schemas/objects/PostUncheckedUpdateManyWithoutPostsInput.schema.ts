@@ -1,12 +1,13 @@
-import { z } from 'zod';
-import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
-import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
-import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
-import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-import { BoolFieldUpdateOperationsInputObjectSchema } from './BoolFieldUpdateOperationsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntFieldUpdateOperationsInputObjectSchema,
+  DateTimeFieldUpdateOperationsInputObjectSchema,
+  StringFieldUpdateOperationsInputObjectSchema,
+  NullableStringFieldUpdateOperationsInputObjectSchema,
+  BoolFieldUpdateOperationsInputObjectSchema,
+} from './index';
 export const PostUncheckedUpdateManyWithoutPostsInputObjectSchemaBase = z
   .object({
     id: z
@@ -54,6 +55,5 @@ export const PostUncheckedUpdateManyWithoutPostsInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const PostUncheckedUpdateManyWithoutPostsInputObjectSchema: z.ZodType<Prisma.PostUncheckedUpdateManyWithoutPostsInput> =
   PostUncheckedUpdateManyWithoutPostsInputObjectSchemaBase;

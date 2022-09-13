@@ -1,7 +1,7 @@
-import { z } from 'zod';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import './index';
 export const NestedIntFilterObjectSchemaBase = z
   .object({
     equals: z.number().optional(),
@@ -16,6 +16,5 @@ export const NestedIntFilterObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const NestedIntFilterObjectSchema: z.ZodType<Prisma.NestedIntFilter> =
   NestedIntFilterObjectSchemaBase;

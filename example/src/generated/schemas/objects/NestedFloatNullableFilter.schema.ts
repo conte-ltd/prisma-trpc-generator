@@ -1,7 +1,7 @@
-import { z } from 'zod';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import './index';
 export const NestedFloatNullableFilterObjectSchemaBase = z
   .object({
     equals: z.number().optional().nullable(),
@@ -17,6 +17,5 @@ export const NestedFloatNullableFilterObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const NestedFloatNullableFilterObjectSchema: z.ZodType<Prisma.NestedFloatNullableFilter> =
   NestedFloatNullableFilterObjectSchemaBase;

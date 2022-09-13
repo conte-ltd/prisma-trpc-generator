@@ -1,11 +1,12 @@
-import { z } from 'zod';
-import { UserUpdateWithoutPostsInputObjectSchema } from './UserUpdateWithoutPostsInput.schema';
-import { UserUncheckedUpdateWithoutPostsInputObjectSchema } from './UserUncheckedUpdateWithoutPostsInput.schema';
-import { UserCreateWithoutPostsInputObjectSchema } from './UserCreateWithoutPostsInput.schema';
-import { UserUncheckedCreateWithoutPostsInputObjectSchema } from './UserUncheckedCreateWithoutPostsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  UserUpdateWithoutPostsInputObjectSchema,
+  UserUncheckedUpdateWithoutPostsInputObjectSchema,
+  UserCreateWithoutPostsInputObjectSchema,
+  UserUncheckedCreateWithoutPostsInputObjectSchema,
+} from './index';
 export const UserUpsertWithoutPostsInputObjectSchemaBase = z
   .object({
     update: z.union([
@@ -18,6 +19,5 @@ export const UserUpsertWithoutPostsInputObjectSchemaBase = z
     ]),
   })
   .strict();
-
 export const UserUpsertWithoutPostsInputObjectSchema: z.ZodType<Prisma.UserUpsertWithoutPostsInput> =
   UserUpsertWithoutPostsInputObjectSchemaBase;

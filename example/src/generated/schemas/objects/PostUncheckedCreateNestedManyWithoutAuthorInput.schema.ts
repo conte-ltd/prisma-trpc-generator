@@ -1,11 +1,12 @@
-import { z } from 'zod';
-import { PostCreateWithoutAuthorInputObjectSchema } from './PostCreateWithoutAuthorInput.schema';
-import { PostUncheckedCreateWithoutAuthorInputObjectSchema } from './PostUncheckedCreateWithoutAuthorInput.schema';
-import { PostCreateOrConnectWithoutAuthorInputObjectSchema } from './PostCreateOrConnectWithoutAuthorInput.schema';
-import { PostWhereUniqueInputObjectSchema } from './PostWhereUniqueInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  PostCreateWithoutAuthorInputObjectSchema,
+  PostUncheckedCreateWithoutAuthorInputObjectSchema,
+  PostCreateOrConnectWithoutAuthorInputObjectSchema,
+  PostWhereUniqueInputObjectSchema,
+} from './index';
 export const PostUncheckedCreateNestedManyWithoutAuthorInputObjectSchemaBase =
   z.union([
     z
@@ -45,6 +46,5 @@ export const PostUncheckedCreateNestedManyWithoutAuthorInputObjectSchemaBase =
       })
       .strict(),
   ]);
-
 export const PostUncheckedCreateNestedManyWithoutAuthorInputObjectSchema: z.ZodType<Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput> =
   PostUncheckedCreateNestedManyWithoutAuthorInputObjectSchemaBase;

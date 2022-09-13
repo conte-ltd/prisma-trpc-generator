@@ -1,8 +1,7 @@
-import { z } from 'zod';
-import { UserCreateNestedOneWithoutPostsInputObjectSchema } from './UserCreateNestedOneWithoutPostsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import { UserCreateNestedOneWithoutPostsInputObjectSchema } from './index';
 export const PostCreateInputObjectSchemaBase = z
   .object({
     createdAt: z.date().optional(),
@@ -16,6 +15,5 @@ export const PostCreateInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const PostCreateInputObjectSchema: z.ZodType<Prisma.PostCreateInput> =
   PostCreateInputObjectSchemaBase;

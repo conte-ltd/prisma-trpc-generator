@@ -1,12 +1,13 @@
-import { z } from 'zod';
-import { DateTimeFieldUpdateOperationsInputObjectSchema } from './DateTimeFieldUpdateOperationsInput.schema';
-import { StringFieldUpdateOperationsInputObjectSchema } from './StringFieldUpdateOperationsInput.schema';
-import { NullableStringFieldUpdateOperationsInputObjectSchema } from './NullableStringFieldUpdateOperationsInput.schema';
-import { BoolFieldUpdateOperationsInputObjectSchema } from './BoolFieldUpdateOperationsInput.schema';
-import { IntFieldUpdateOperationsInputObjectSchema } from './IntFieldUpdateOperationsInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  DateTimeFieldUpdateOperationsInputObjectSchema,
+  StringFieldUpdateOperationsInputObjectSchema,
+  NullableStringFieldUpdateOperationsInputObjectSchema,
+  BoolFieldUpdateOperationsInputObjectSchema,
+  IntFieldUpdateOperationsInputObjectSchema,
+} from './index';
 export const PostUpdateWithoutAuthorInputObjectSchemaBase = z
   .object({
     createdAt: z
@@ -48,6 +49,5 @@ export const PostUpdateWithoutAuthorInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const PostUpdateWithoutAuthorInputObjectSchema: z.ZodType<Prisma.PostUpdateWithoutAuthorInput> =
   PostUpdateWithoutAuthorInputObjectSchemaBase;

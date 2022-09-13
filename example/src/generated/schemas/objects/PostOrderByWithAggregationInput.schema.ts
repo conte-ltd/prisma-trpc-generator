@@ -1,23 +1,23 @@
-import { z } from 'zod';
-import { SortOrderSchema } from '../enums/SortOrder.schema';
-import { PostCountOrderByAggregateInputObjectSchema } from './PostCountOrderByAggregateInput.schema';
-import { PostAvgOrderByAggregateInputObjectSchema } from './PostAvgOrderByAggregateInput.schema';
-import { PostMaxOrderByAggregateInputObjectSchema } from './PostMaxOrderByAggregateInput.schema';
-import { PostMinOrderByAggregateInputObjectSchema } from './PostMinOrderByAggregateInput.schema';
-import { PostSumOrderByAggregateInputObjectSchema } from './PostSumOrderByAggregateInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import { SortOrderSchema } from '../enums';
+import {
+  PostCountOrderByAggregateInputObjectSchema,
+  PostAvgOrderByAggregateInputObjectSchema,
+  PostMaxOrderByAggregateInputObjectSchema,
+  PostMinOrderByAggregateInputObjectSchema,
+  PostSumOrderByAggregateInputObjectSchema,
+} from './index';
 export const PostOrderByWithAggregationInputObjectSchemaBase = z
   .object({
-    id: z.lazy(() => SortOrderSchema).optional(),
-    createdAt: z.lazy(() => SortOrderSchema).optional(),
-    updatedAt: z.lazy(() => SortOrderSchema).optional(),
-    title: z.lazy(() => SortOrderSchema).optional(),
-    content: z.lazy(() => SortOrderSchema).optional(),
-    published: z.lazy(() => SortOrderSchema).optional(),
-    viewCount: z.lazy(() => SortOrderSchema).optional(),
-    authorId: z.lazy(() => SortOrderSchema).optional(),
+    id: SortOrderSchema.optional(),
+    createdAt: SortOrderSchema.optional(),
+    updatedAt: SortOrderSchema.optional(),
+    title: SortOrderSchema.optional(),
+    content: SortOrderSchema.optional(),
+    published: SortOrderSchema.optional(),
+    viewCount: SortOrderSchema.optional(),
+    authorId: SortOrderSchema.optional(),
     _count: z.lazy(() => PostCountOrderByAggregateInputObjectSchema).optional(),
     _avg: z.lazy(() => PostAvgOrderByAggregateInputObjectSchema).optional(),
     _max: z.lazy(() => PostMaxOrderByAggregateInputObjectSchema).optional(),
@@ -25,6 +25,5 @@ export const PostOrderByWithAggregationInputObjectSchemaBase = z
     _sum: z.lazy(() => PostSumOrderByAggregateInputObjectSchema).optional(),
   })
   .strict();
-
 export const PostOrderByWithAggregationInputObjectSchema: z.ZodType<Prisma.PostOrderByWithAggregationInput> =
   PostOrderByWithAggregationInputObjectSchemaBase;

@@ -1,9 +1,10 @@
-import { z } from 'zod';
-import { NestedIntFilterObjectSchema } from './NestedIntFilter.schema';
-import { NestedDateTimeFilterObjectSchema } from './NestedDateTimeFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  NestedIntFilterObjectSchema,
+  NestedDateTimeFilterObjectSchema,
+} from './index';
 export const NestedDateTimeWithAggregatesFilterObjectSchemaBase = z
   .object({
     equals: z.date().optional(),
@@ -24,6 +25,5 @@ export const NestedDateTimeWithAggregatesFilterObjectSchemaBase = z
     _max: z.lazy(() => NestedDateTimeFilterObjectSchema).optional(),
   })
   .strict();
-
 export const NestedDateTimeWithAggregatesFilterObjectSchema: z.ZodType<Prisma.NestedDateTimeWithAggregatesFilter> =
   NestedDateTimeWithAggregatesFilterObjectSchemaBase;

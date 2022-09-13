@@ -1,13 +1,14 @@
-import { z } from 'zod';
-import { IntWithAggregatesFilterObjectSchema } from './IntWithAggregatesFilter.schema';
-import { DateTimeWithAggregatesFilterObjectSchema } from './DateTimeWithAggregatesFilter.schema';
-import { StringWithAggregatesFilterObjectSchema } from './StringWithAggregatesFilter.schema';
-import { StringNullableWithAggregatesFilterObjectSchema } from './StringNullableWithAggregatesFilter.schema';
-import { BoolWithAggregatesFilterObjectSchema } from './BoolWithAggregatesFilter.schema';
-import { IntNullableWithAggregatesFilterObjectSchema } from './IntNullableWithAggregatesFilter.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import {
+  IntWithAggregatesFilterObjectSchema,
+  DateTimeWithAggregatesFilterObjectSchema,
+  StringWithAggregatesFilterObjectSchema,
+  StringNullableWithAggregatesFilterObjectSchema,
+  BoolWithAggregatesFilterObjectSchema,
+  IntNullableWithAggregatesFilterObjectSchema,
+} from './index';
 export const PostScalarWhereWithAggregatesInputObjectSchemaBase = z
   .object({
     AND: z
@@ -60,6 +61,5 @@ export const PostScalarWhereWithAggregatesInputObjectSchemaBase = z
       .nullable(),
   })
   .strict();
-
 export const PostScalarWhereWithAggregatesInputObjectSchema: z.ZodType<Prisma.PostScalarWhereWithAggregatesInput> =
   PostScalarWhereWithAggregatesInputObjectSchemaBase;

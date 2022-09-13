@@ -1,7 +1,7 @@
-import { z } from 'zod';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import './index';
 export const NullableIntFieldUpdateOperationsInputObjectSchemaBase = z
   .object({
     set: z.number().optional().nullable(),
@@ -11,6 +11,5 @@ export const NullableIntFieldUpdateOperationsInputObjectSchemaBase = z
     divide: z.number().optional(),
   })
   .strict();
-
 export const NullableIntFieldUpdateOperationsInputObjectSchema: z.ZodType<Prisma.NullableIntFieldUpdateOperationsInput> =
   NullableIntFieldUpdateOperationsInputObjectSchemaBase;

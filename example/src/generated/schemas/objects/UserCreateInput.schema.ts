@@ -1,8 +1,7 @@
-import { z } from 'zod';
-import { PostCreateNestedManyWithoutAuthorInputObjectSchema } from './PostCreateNestedManyWithoutAuthorInput.schema';
-
 import type { Prisma } from '@prisma/client';
-
+import { z } from 'zod';
+import '../enums';
+import { PostCreateNestedManyWithoutAuthorInputObjectSchema } from './index';
 export const UserCreateInputObjectSchemaBase = z
   .object({
     email: z.string(),
@@ -12,6 +11,5 @@ export const UserCreateInputObjectSchemaBase = z
       .optional(),
   })
   .strict();
-
 export const UserCreateInputObjectSchema: z.ZodType<Prisma.UserCreateInput> =
   UserCreateInputObjectSchemaBase;

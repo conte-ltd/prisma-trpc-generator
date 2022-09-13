@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "@prisma-trpc-generator/example",
   "version": "0.0.1",
   "description": "Prisma 2+ generator to emit fully implemented tRPC routers",
   "repository": "https://github.com/conte-ltd/prisma-trpc-generator",
@@ -8,11 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "package:publish": "./package.sh && cd package && npm publish"
-  },
-  "author": {
-    "name": "CONTE, Ltd.",
-    "url": "https://github.com/conte-ltd"
+    "prisma:generate": "npx prisma generate"
   },
   "keywords": [
     "prisma",
@@ -26,7 +22,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@conte-ltd/prisma-zod-generator": "0.0.7",
+    "@conte-ltd/prisma-zod-generator": "0.0.10",
     "@prisma/client": "^4.3.1",
     "@prisma/generator-helper": "^4.3.1",
     "@prisma/internals": "^4.3.1",
@@ -41,12 +37,5 @@
     "prisma": "^4.3.1",
     "trpc-shield": "^0.1.1",
     "typescript": "^4.8.2"
-  },
-  "bugs": {
-    "url": "https://github.com/conte-ltd/prisma-trpc-generator/issues"
-  },
-  "homepage": "https://github.com/conte-ltd/prisma-trpc-generator#readme",
-  "publishConfig": {
-    "access": "public"
   }
 }
