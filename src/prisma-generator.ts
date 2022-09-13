@@ -3,7 +3,6 @@ import { getDMMF, parseEnvValue } from '@prisma/internals';
 import { promises as fs } from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
-import { generate as PrismaZodGenerator } from '@conte-ltd/prisma-zod-generator/lib/prisma-generator';
 import { configSchema } from './config';
 import {
   generateBaseRouterImport,
@@ -25,11 +24,18 @@ export async function generate(options: GeneratorOptions) {
 
   await fs.mkdir(outputDir, { recursive: true });
   await removeDir(outputDir, true);
-  await PrismaZodGenerator(options);
 
   const prismaClientProvider = options.otherGenerators.find(
     (it) => parseEnvValue(it.provider) === 'prisma-client-js',
   );
+  
+  const zodOptions = options.otherGenerators.find(
+    (it) => parseEnvValue(it.provider) === 'prisma-zod-generator'
+  )
+  
+  if (!zodOptions) {
+    throw new Error('prisma-zod-generator is required.')
+  }
 
   const dataSource = options.datasources?.[0];
 
@@ -39,7 +45,7 @@ export async function generate(options: GeneratorOptions) {
   });
 
   const appRouter = project.createSourceFile(
-    path.resolve(outputDir, 'routers', `index.ts`),
+    path.resolve(outputDir, `index.ts`),
     undefined,
     { overwrite: true },
   );
@@ -55,7 +61,7 @@ export async function generate(options: GeneratorOptions) {
     const hasCreateMany = Boolean(operations.createMany);
     generateRouterImport(appRouter, plural, model);
     const modelRouter = project.createSourceFile(
-      path.resolve(outputDir, 'routers', `${model}.router.ts`),
+      path.resolve(outputDir, `${model}.router.ts`),
       undefined,
       { overwrite: true },
     );
@@ -66,6 +72,7 @@ export async function generate(options: GeneratorOptions) {
       model,
       hasCreateMany,
       dataSource.provider,
+      config.schemaPath ?? zodOptions.output!.value,
     );
 
     modelRouter.addStatements(/* ts */ `

@@ -3,6 +3,7 @@ lib
 package
 npm-debug.log*
 src/generated
+prisma/generated
 prisma/shield
 .idea
 .vscode

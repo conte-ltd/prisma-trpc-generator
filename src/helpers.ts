@@ -12,13 +12,6 @@ export const generateCreateRouterImport = (
   });
 };
 
-export const generatetRPCImport = (sourceFile: SourceFile) => {
-  sourceFile.addImportDeclaration({
-    moduleSpecifier: '@trpc/server',
-    namespaceImport: 'trpc',
-  });
-};
-
 export const generateRouterImport = (
   sourceFile: SourceFile,
   modelNamePlural: string,
@@ -64,84 +57,87 @@ export function generateRouterSchemaImports(
   name: string,
   hasCreateMany: boolean,
   provider: string,
+  schemaPath: string
 ) {
-  let statements = [
-    `import { ${name}FindUniqueSchema } from "../schemas/findUnique${name}.schema";`,
-    `import { ${name}FindFirstSchema } from "../schemas/findFirst${name}.schema";`,
-    `import { ${name}FindManySchema } from "../schemas/findMany${name}.schema";`,
-    `import { ${name}CreateOneSchema } from "../schemas/createOne${name}.schema";`,
+  let imports = [
+    `FindUnique${name}Schema`,
+    `FindFirst${name}Schema`,
+    `FindMany${name}Schema`,
+    `CreateOne${name}Schema`,
   ];
 
   if (hasCreateMany) {
-    statements.push(
-      `import { ${name}CreateManySchema } from "../schemas/createMany${name}.schema";`,
+    imports.push(
+      `CreateMany${name}Schema`,
     );
   }
 
-  statements = statements.concat([
-    `import { ${name}DeleteOneSchema } from "../schemas/deleteOne${name}.schema";`,
-    `import { ${name}UpdateOneSchema } from "../schemas/updateOne${name}.schema";`,
-    `import { ${name}DeleteManySchema } from "../schemas/deleteMany${name}.schema";`,
-    `import { ${name}UpdateManySchema } from "../schemas/updateMany${name}.schema";`,
-    `import { ${name}UpsertSchema } from "../schemas/upsertOne${name}.schema";`,
-    `import { ${name}AggregateSchema } from "../schemas/aggregate${name}.schema";`,
-    `import { ${name}GroupBySchema } from "../schemas/groupBy${name}.schema";`,
+  imports = imports.concat([
+    `DeleteOne${name}Schema`,
+    `UpdateOne${name}Schema`,
+    `DeleteMany${name}Schema`,
+    `UpdateMany${name}Schema`,
+    `UpsertOne${name}Schema`,
+    `Aggregate${name}Schema`,
+    `GroupBy${name}Schema`,
   ]);
 
   if (provider === 'mongodb') {
-    statements = statements.concat([
-      `import { ${name}FindRawObjectSchema } from "../schemas/objects/${name}FindRaw.schema";`,
-      `import { ${name}AggregateRawObjectSchema } from "../schemas/objects/${name}AggregateRaw.schema";`,
+    imports = imports.concat([
+      `FindRawObject${name}Schema`,
+      `AggregateRawObject${name}Schema`,
     ]);
   }
 
-  sourceFile.addStatements(/* ts */ statements.join('\n'));
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: schemaPath
+  }).addNamedImports(imports)
 }
 
 export const getInputTypeByOpName = (opName: string, modelName: string) => {
   let inputType;
   switch (opName) {
     case 'findUnique':
-      inputType = `${modelName}FindUniqueSchema`;
+      inputType = `FindUnique${modelName}Schema`;
       break;
     case 'findFirst':
-      inputType = `${modelName}FindFirstSchema`;
+      inputType = `FindFirst${modelName}Schema`;
       break;
     case 'findMany':
-      inputType = `${modelName}FindManySchema`;
+      inputType = `FindMany${modelName}Schema`;
       break;
     case 'findRaw':
-      inputType = `${modelName}FindRawObjectSchema`;
+      inputType = `FindRawObject${modelName}Schema`;
       break;
     case 'createOne':
-      inputType = `${modelName}CreateOneSchema`;
+      inputType = `CreateOne${modelName}Schema`;
       break;
     case 'createMany':
-      inputType = `${modelName}CreateManySchema`;
+      inputType = `CreateMany${modelName}Schema`;
       break;
     case 'deleteOne':
-      inputType = `${modelName}DeleteOneSchema`;
+      inputType = `DeleteOne${modelName}Schema`;
       break;
     case 'updateOne':
-      inputType = `${modelName}UpdateOneSchema`;
+      inputType = `UpdateOne${modelName}Schema`;
       break;
     case 'deleteMany':
-      inputType = `${modelName}DeleteManySchema`;
+      inputType = `DeleteMany${modelName}Schema`;
       break;
     case 'updateMany':
-      inputType = `${modelName}UpdateManySchema`;
+      inputType = `UpdateMany${modelName}Schema`;
       break;
     case 'upsertOne':
-      inputType = `${modelName}UpsertSchema`;
+      inputType = `UpsertOne${modelName}Schema`;
       break;
     case 'aggregate':
-      inputType = `${modelName}AggregateSchema`;
+      inputType = `Aggregate${modelName}Schema`;
       break;
     case 'aggregateRaw':
-      inputType = `${modelName}AggregateRawObjectSchema`;
+      inputType = `AggregateRawObject${modelName}Schema`;
       break;
     case 'groupBy':
-      inputType = `${modelName}GroupBySchema`;
+      inputType = `GroupBy${modelName}Schema`;
       break;
     default:
       console.log('getInputTypeByOpName: ', { opName, modelName });

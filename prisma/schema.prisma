@@ -4,8 +4,14 @@ generator client {
 
 generator trpc {
   provider       = "node ./lib/generator.js"
-  output         = "../example/src/generated"
+  output         = "../example/src/generated/routers"
   baseRouterPath = "../../router"
+  schemaPath = "../schemas"
+}
+
+generator zod {
+  provider   = "prisma-zod-generator"
+  output     = "../example/src/generated/schemas"
 }
 
 datasource db {
