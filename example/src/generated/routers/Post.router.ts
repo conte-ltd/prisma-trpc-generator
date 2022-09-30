@@ -1,57 +1,57 @@
-import { t } from "../../trpc";
+import { t, procedure } from "../../trpc";
 import { FindUniquePostSchema, FindFirstPostSchema, FindManyPostSchema, CreateOnePostSchema, DeleteOnePostSchema, UpdateOnePostSchema, DeleteManyPostSchema, UpdateManyPostSchema, UpsertOnePostSchema, AggregatePostSchema, GroupByPostSchema } from "../schemas";
 
-const aggregate = t.procedure
+const aggregate = procedure
   .input(AggregatePostSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.post.aggregate(input);
   });
-const createOne = t.procedure
+const createOne = procedure
   .input(CreateOnePostSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.post.create(input);
   });
-const deleteMany = t.procedure
+const deleteMany = procedure
   .input(DeleteManyPostSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.post.deleteMany(input);
   });
-const deleteOne = t.procedure
+const deleteOne = procedure
   .input(DeleteOnePostSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.post.delete(input);
   });
-const findFirst = t.procedure
+const findFirst = procedure
   .input(FindFirstPostSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.post.findFirst(input);
   });
-const findMany = t.procedure
+const findMany = procedure
   .input(FindManyPostSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.post.findMany(input);
   });
-const findUnique = t.procedure
+const findUnique = procedure
   .input(FindUniquePostSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.post.findUnique(input);
   });
-const groupBy = t.procedure
+const groupBy = procedure
   .input(GroupByPostSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.post.groupBy(input);
   });
-const updateMany = t.procedure
+const updateMany = procedure
   .input(UpdateManyPostSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.post.updateMany(input);
   });
-const updateOne = t.procedure
+const updateOne = procedure
   .input(UpdateOnePostSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.post.update(input);
   });
-const upsertOne = t.procedure
+const upsertOne = procedure
   .input(UpsertOnePostSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.post.upsert(input);

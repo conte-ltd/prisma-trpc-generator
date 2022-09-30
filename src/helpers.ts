@@ -13,10 +13,20 @@ export const generateRouterImport = (
   });
 };
 
-export function generateTrpcImport(sourceFile: SourceFile, config: Config) {
+export function generateInitTRPCImport(sourceFile: SourceFile, config: Config) {
   sourceFile.addImportDeclaration({
     moduleSpecifier: config.initTRPCPath,
     namedImports: [config.initTRPCName],
+  });
+}
+
+export function generateProcedureImport(
+  sourceFile: SourceFile,
+  config: Config,
+) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: config.initTRPCPath,
+    namedImports: [config.initTRPCName, config.procedureName],
   });
 }
 
@@ -34,7 +44,7 @@ export function generateProcedure(
       {
         name,
         /* ts */
-        initializer: `${config.initTRPCName}.procedure
+        initializer: `${config.procedureName}
   .input(${typeName})
   .${getProcedureTypeByOpName(opType)}(async ({ ctx, input }) => {
       return ctx.prisma.${uncapitalizeFirstLetter(modelName)}.${opType.replace(

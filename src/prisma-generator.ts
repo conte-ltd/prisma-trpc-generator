@@ -5,11 +5,12 @@ import path from 'path';
 import pluralize from 'pluralize';
 import { configSchema } from './config';
 import {
-  generateTrpcImport,
+  generateProcedureImport,
   generateProcedure,
   generateRouterImport,
   generateRouterSchemaImports,
   getInputTypeByOpName,
+  generateInitTRPCImport,
 } from './helpers';
 import { project } from './project';
 import removeDir from './utils/removeDir';
@@ -62,7 +63,7 @@ export async function generate(options: GeneratorOptions) {
       { overwrite: true },
     );
 
-    generateTrpcImport(modelRouter, config);
+    generateProcedureImport(modelRouter, config);
     generateRouterSchemaImports(
       modelRouter,
       model,
@@ -101,7 +102,7 @@ export async function generate(options: GeneratorOptions) {
     modelRouters.push(`${plural}: ${plural}Router`);
   });
 
-  generateTrpcImport(appRouter, config);
+  generateInitTRPCImport(appRouter, config);
 
   appRouter.addStatements(/* ts */ `
   export const appRouter = ${config.initTRPCName}.router({

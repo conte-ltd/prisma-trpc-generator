@@ -1,57 +1,57 @@
-import { t } from "../../trpc";
+import { t, procedure } from "../../trpc";
 import { FindUniqueUserSchema, FindFirstUserSchema, FindManyUserSchema, CreateOneUserSchema, DeleteOneUserSchema, UpdateOneUserSchema, DeleteManyUserSchema, UpdateManyUserSchema, UpsertOneUserSchema, AggregateUserSchema, GroupByUserSchema } from "../schemas";
 
-const aggregate = t.procedure
+const aggregate = procedure
   .input(AggregateUserSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.user.aggregate(input);
   });
-const createOne = t.procedure
+const createOne = procedure
   .input(CreateOneUserSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.user.create(input);
   });
-const deleteMany = t.procedure
+const deleteMany = procedure
   .input(DeleteManyUserSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.user.deleteMany(input);
   });
-const deleteOne = t.procedure
+const deleteOne = procedure
   .input(DeleteOneUserSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.user.delete(input);
   });
-const findFirst = t.procedure
+const findFirst = procedure
   .input(FindFirstUserSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.user.findFirst(input);
   });
-const findMany = t.procedure
+const findMany = procedure
   .input(FindManyUserSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.user.findMany(input);
   });
-const findUnique = t.procedure
+const findUnique = procedure
   .input(FindUniqueUserSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.user.findUnique(input);
   });
-const groupBy = t.procedure
+const groupBy = procedure
   .input(GroupByUserSchema)
   .query(async ({ ctx, input }) => {
     return ctx.prisma.user.groupBy(input);
   });
-const updateMany = t.procedure
+const updateMany = procedure
   .input(UpdateManyUserSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.user.updateMany(input);
   });
-const updateOne = t.procedure
+const updateOne = procedure
   .input(UpdateOneUserSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.user.update(input);
   });
-const upsertOne = t.procedure
+const upsertOne = procedure
   .input(UpsertOneUserSchema)
   .mutation(async ({ ctx, input }) => {
     return ctx.prisma.user.upsert(input);

@@ -218,11 +218,12 @@ export const postsRouter = createRouter()
 
 # Additional Options
 
-| Option         | Description                                                 | Type      | Default               |
-|----------------|-------------------------------------------------------------| --------- |-----------------------|
-| `output`       | Output directory for the generated routers and zod schemas  | `string`  | `./generated`         |
-| `initTRPCPath` | Sets the init trpc path used in your routers                | `string`  | `.../../../src/trpc`  |
-| `initTRPCName` | Sets the init trpc name used in your routers                | `string`  | `t`                   |
+| Option          | Description                                                | Type      | Default              |
+|-----------------|------------------------------------------------------------| --------- |----------------------|
+| `output`        | Output directory for the generated routers and zod schemas | `string`  | `./generated`        |
+| `initTRPCPath`  | Sets the init trpc path used in your routers               | `string`  | `.../../../src/trpc` |
+| `initTRPCName`  | Sets the init trpc name used in your routers               | `string`  | `t`                  |
+| `procedureName` | Sets the procedure name used in your routers               | `string`  | `procedure`          |
 
 Example of `init trpc`
 
@@ -231,4 +232,5 @@ import { initTRPC } from '@trpc/server';
 import { Context } from './context';
 
 export const t = initTRPC.context<Context>().create()
+export const procedure = t.procedure
 ```
