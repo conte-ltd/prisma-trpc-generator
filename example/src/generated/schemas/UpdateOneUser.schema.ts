@@ -5,6 +5,7 @@ import {
   UserUncheckedUpdateInputObjectSchema,
   UserWhereUniqueInputObjectSchema,
   UserSelectObjectSchema,
+  UserIncludeObjectSchema,
 } from './objects';
 
 export const UpdateOneUserSchema = z
@@ -15,5 +16,6 @@ export const UpdateOneUserSchema = z
     ]),
     where: z.lazy(() => UserWhereUniqueInputObjectSchema),
     select: z.lazy(() => UserSelectObjectSchema).optional(),
+    include: z.lazy(() => UserIncludeObjectSchema).optional(),
   })
   .strict();

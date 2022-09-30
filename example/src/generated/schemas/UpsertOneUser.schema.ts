@@ -7,6 +7,7 @@ import {
   UserUpdateInputObjectSchema,
   UserUncheckedUpdateInputObjectSchema,
   UserSelectObjectSchema,
+  UserIncludeObjectSchema,
 } from './objects';
 
 export const UpsertOneUserSchema = z
@@ -21,5 +22,6 @@ export const UpsertOneUserSchema = z
       z.lazy(() => UserUncheckedUpdateInputObjectSchema),
     ]),
     select: z.lazy(() => UserSelectObjectSchema).optional(),
+    include: z.lazy(() => UserIncludeObjectSchema).optional(),
   })
   .strict();

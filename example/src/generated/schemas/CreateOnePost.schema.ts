@@ -4,6 +4,7 @@ import {
   PostCreateInputObjectSchema,
   PostUncheckedCreateInputObjectSchema,
   PostSelectObjectSchema,
+  PostIncludeObjectSchema,
 } from './objects';
 
 export const CreateOnePostSchema = z
@@ -13,5 +14,6 @@ export const CreateOnePostSchema = z
       z.lazy(() => PostUncheckedCreateInputObjectSchema),
     ]),
     select: z.lazy(() => PostSelectObjectSchema).optional(),
+    include: z.lazy(() => PostIncludeObjectSchema).optional(),
   })
   .strict();

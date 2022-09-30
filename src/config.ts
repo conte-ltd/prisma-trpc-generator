@@ -1,10 +1,9 @@
 import { z } from 'zod';
 
 export const configSchema = z.object({
-  baseRouterPath: z.string().default('../../../src/router'),
-  baseRouterName: z.string().default('baseRouter'),
-  createRouterName: z.string().default('createRouter'),
-  schemaPath: z.string().optional()
+  initTRPCPath: z.string().default('../../../src/trpc'),
+  initTRPCName: z.string().default('t'),
+  schemaPath: z.string().optional(),
 });
 
 export type Config = z.infer<typeof configSchema>;

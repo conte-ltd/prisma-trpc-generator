@@ -4,6 +4,7 @@ import {
   UserCreateInputObjectSchema,
   UserUncheckedCreateInputObjectSchema,
   UserSelectObjectSchema,
+  UserIncludeObjectSchema,
 } from './objects';
 
 export const CreateOneUserSchema = z
@@ -13,5 +14,6 @@ export const CreateOneUserSchema = z
       z.lazy(() => UserUncheckedCreateInputObjectSchema),
     ]),
     select: z.lazy(() => UserSelectObjectSchema).optional(),
+    include: z.lazy(() => UserIncludeObjectSchema).optional(),
   })
   .strict();

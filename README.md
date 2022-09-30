@@ -37,10 +37,12 @@ Automatically generate fully implemented tRPC routers from your [Prisma](https:/
 
 # Supported Prisma Versions
 
-### Prisma 4  
-- 0.2.0 and higher
-### Prisma 2/3 
-- 0.1.12 and lower
+4.0.0 or higher
+
+
+# Supported TRPC Versions
+
+10.0.0 or higher
 
 # Installation
 
@@ -216,22 +218,17 @@ export const postsRouter = createRouter()
 
 # Additional Options
 
-| Option             |  Description                                               | Type      |  Default                  |
-|--------------------|------------------------------------------------------------| --------- |---------------------------|
-| `output`           | Output directory for the generated routers and zod schemas | `string`  | `./generated`             |
-| `baseRouterPath`   | Sets the base router path used in your routers             | `string`  | `../../../../src/context` |
-| `baseRouterName`   | Sets the base router name used in your routers             | `string`  | `baseRouter`              |
-| `createRouterName` | Sets the create router name used in your routers           | `string`  | `createRouter`            |
+| Option         | Description                                                 | Type      | Default               |
+|----------------|-------------------------------------------------------------| --------- |-----------------------|
+| `output`       | Output directory for the generated routers and zod schemas  | `string`  | `./generated`         |
+| `initTRPCPath` | Sets the init trpc path used in your routers                | `string`  | `.../../../src/trpc`  |
+| `initTRPCName` | Sets the init trpc name used in your routers                | `string`  | `t`                   |
 
-Example of `bathRouter` and `createRouter`
+Example of `init trpc`
 
 ```ts
-import * as trpc from '@trpc/server';
+import { initTRPC } from '@trpc/server';
 import { Context } from './context';
 
-export const createRouter = () => {
-  return trpc.router<Context>();
-};
-
-export const baseRouter = createRouter();
+export const t = initTRPC.context<Context>().create()
 ```

@@ -2,18 +2,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator trpc {
-  provider       = "node ./lib/generator.js"
-  output         = "../example/src/generated/routers"
-  initTRPCPath = "../../trpc"
-  schemaPath = "../schemas"
-}
-
-generator zod {
-  provider   = "prisma-zod-generator"
-  output     = "../example/src/generated/schemas"
-}
-
 datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"

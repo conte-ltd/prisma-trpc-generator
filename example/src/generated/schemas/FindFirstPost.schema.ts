@@ -5,6 +5,7 @@ import {
   PostOrderByWithRelationInputObjectSchema,
   PostWhereUniqueInputObjectSchema,
   PostSelectObjectSchema,
+  PostIncludeObjectSchema,
 } from './objects';
 
 export const FindFirstPostSchema = z
@@ -21,5 +22,6 @@ export const FindFirstPostSchema = z
     skip: z.number().optional(),
     distinct: PostScalarFieldEnumSchema.array().optional(),
     select: z.lazy(() => PostSelectObjectSchema).optional(),
+    include: z.lazy(() => PostIncludeObjectSchema).optional(),
   })
   .strict();

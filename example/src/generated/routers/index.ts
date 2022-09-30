@@ -1,9 +1,8 @@
-import { baseRouter } from "../../router";
 import { usersRouter } from "./User.router";
 import { postsRouter } from "./Post.router";
+import { t } from "../../trpc";
 
-export const appRouter = baseRouter
-
-  .merge('user.', usersRouter)
-
-  .merge('post.', postsRouter)
+export const appRouter = t.router({
+  users: usersRouter,
+  posts: postsRouter
+})

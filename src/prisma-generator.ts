@@ -5,8 +5,7 @@ import path from 'path';
 import pluralize from 'pluralize';
 import { configSchema } from './config';
 import {
-  generateBaseRouterImport,
-  generateCreateRouterImport,
+  generateTrpcImport,
   generateProcedure,
   generateRouterImport,
   generateRouterSchemaImports,
@@ -28,13 +27,13 @@ export async function generate(options: GeneratorOptions) {
   const prismaClientProvider = options.otherGenerators.find(
     (it) => parseEnvValue(it.provider) === 'prisma-client-js',
   );
-  
+
   const zodOptions = options.otherGenerators.find(
-    (it) => parseEnvValue(it.provider) === 'prisma-zod-generator'
-  )
-  
+    (it) => parseEnvValue(it.provider) === 'prisma-zod-generator',
+  );
+
   if (!zodOptions) {
-    throw new Error('prisma-zod-generator is required.')
+    throw new Error('prisma-zod-generator is required.');
   }
 
   const dataSource = options.datasources?.[0];
@@ -50,10 +49,7 @@ export async function generate(options: GeneratorOptions) {
     { overwrite: true },
   );
 
-  generateBaseRouterImport(appRouter, config);
-
-  appRouter.addStatements(/* ts */ `
-  export const appRouter = ${config.baseRouterName}`);
+  const modelRouters: string[] = [];
 
   prismaClientDmmf.mappings.modelOperations.forEach((modelOperation) => {
     const { model, ...operations } = modelOperation;
@@ -66,7 +62,7 @@ export async function generate(options: GeneratorOptions) {
       { overwrite: true },
     );
 
-    generateCreateRouterImport(modelRouter, config);
+    generateTrpcImport(modelRouter, config);
     generateRouterSchemaImports(
       modelRouter,
       model,
@@ -75,21 +71,42 @@ export async function generate(options: GeneratorOptions) {
       config.schemaPath ?? zodOptions.output!.value,
     );
 
-    modelRouter.addStatements(/* ts */ `
-    export const ${plural}Router = createRouter()`);
     for (const [opType, opNameWithModel] of Object.entries(operations)) {
+      if (!opNameWithModel) {
+        continue;
+      }
+
+      const name = opNameWithModel.replace(model as string, '');
+
       generateProcedure(
         modelRouter,
-        opNameWithModel?.replace(model as string, ''),
+        name,
         getInputTypeByOpName(opType, model),
         model,
         opType,
+        config,
       );
     }
+
+    modelRouter.addStatements(/* ts */ `
+    export const ${plural}Router = ${config.initTRPCName}.router({
+      ${modelRouter
+        .getVariableDeclarations()
+        .map((declaretion) => declaretion.getName())
+        .join(',\n')}
+    })`);
+
     modelRouter.formatText({ indentSize: 2 });
-    appRouter.addStatements(/* ts */ `
-    .merge('${uncapitalizeFirstLetter(model)}.', ${plural}Router)`);
+
+    modelRouters.push(`${plural}: ${plural}Router`);
   });
+
+  generateTrpcImport(appRouter, config);
+
+  appRouter.addStatements(/* ts */ `
+  export const appRouter = ${config.initTRPCName}.router({
+    ${modelRouters.join(',\n')}
+  })`);
 
   appRouter.formatText({ indentSize: 2 });
   await project.save();

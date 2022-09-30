@@ -1,16 +1,6 @@
-import { SourceFile } from 'ts-morph';
+import { SourceFile, VariableDeclarationKind } from 'ts-morph';
 import { Config } from './config';
 import { uncapitalizeFirstLetter } from './utils/uncapitalizeFirstLetter';
-
-export const generateCreateRouterImport = (
-  sourceFile: SourceFile,
-  config: Config,
-) => {
-  sourceFile.addImportDeclaration({
-    moduleSpecifier: config.baseRouterPath,
-    namedImports: ['createRouter'],
-  });
-};
 
 export const generateRouterImport = (
   sourceFile: SourceFile,
@@ -23,33 +13,38 @@ export const generateRouterImport = (
   });
 };
 
-export function generateBaseRouterImport(
-  sourceFile: SourceFile,
-  config: Config,
-) {
+export function generateTrpcImport(sourceFile: SourceFile, config: Config) {
   sourceFile.addImportDeclaration({
-    moduleSpecifier: config.baseRouterPath,
-    namedImports: [config.baseRouterName],
+    moduleSpecifier: config.initTRPCPath,
+    namedImports: [config.initTRPCName],
   });
 }
 
 export function generateProcedure(
   sourceFile: SourceFile,
-  name: string | undefined,
+  name: string,
   typeName: string | undefined,
   modelName: string,
   opType: string,
+  config: Config,
 ) {
-  sourceFile.addStatements(/* ts */ `
-  .${getProcedureTypeByOpName(opType)}("${name}", {
-    input: ${typeName},
-    async resolve({ ctx, input }) {
-      const ${name} = await ctx.prisma.${uncapitalizeFirstLetter(
-    modelName,
-  )}.${opType.replace('One', '')}(input);
-      return ${name};
-    },
-  })`);
+  sourceFile.addVariableStatement({
+    declarationKind: VariableDeclarationKind.Const,
+    declarations: [
+      {
+        name,
+        /* ts */
+        initializer: `${config.initTRPCName}.procedure
+  .input(${typeName})
+  .${getProcedureTypeByOpName(opType)}(async ({ ctx, input }) => {
+      return ctx.prisma.${uncapitalizeFirstLetter(modelName)}.${opType.replace(
+          'One',
+          '',
+        )}(input);
+    })`,
+      },
+    ],
+  });
 }
 
 export function generateRouterSchemaImports(
@@ -57,7 +52,7 @@ export function generateRouterSchemaImports(
   name: string,
   hasCreateMany: boolean,
   provider: string,
-  schemaPath: string
+  schemaPath: string,
 ) {
   let imports = [
     `FindUnique${name}Schema`,
@@ -67,9 +62,7 @@ export function generateRouterSchemaImports(
   ];
 
   if (hasCreateMany) {
-    imports.push(
-      `CreateMany${name}Schema`,
-    );
+    imports.push(`CreateMany${name}Schema`);
   }
 
   imports = imports.concat([
@@ -89,9 +82,11 @@ export function generateRouterSchemaImports(
     ]);
   }
 
-  sourceFile.addImportDeclaration({
-    moduleSpecifier: schemaPath
-  }).addNamedImports(imports)
+  sourceFile
+    .addImportDeclaration({
+      moduleSpecifier: schemaPath,
+    })
+    .addNamedImports(imports);
 }
 
 export const getInputTypeByOpName = (opName: string, modelName: string) => {

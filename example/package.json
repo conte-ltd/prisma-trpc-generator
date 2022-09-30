@@ -7,8 +7,9 @@
     "prisma-trpc-generator": "lib/generator.js"
   },
   "scripts": {
+    "prebuild": "yarn generate",
     "build": "tsc",
-    "prisma:generate": "npx prisma generate"
+    "generate": "npx prisma generate"
   },
   "keywords": [
     "prisma",
@@ -22,20 +23,19 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@conte-ltd/prisma-zod-generator": "0.0.10",
-    "@prisma/client": "^4.3.1",
-    "@prisma/generator-helper": "^4.3.1",
-    "@prisma/internals": "^4.3.1",
+    "@conte-ltd/prisma-zod-generator": "0.0.12",
+    "@prisma/client": "^4.4.0",
+    "@prisma/generator-helper": "^4.4.0",
+    "@prisma/internals": "^4.4.0",
     "pluralize": "^8.0.0",
     "ts-morph": "^16.0.0",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@trpc/server": "^9.27.2",
-    "@types/node": "^18.7.15",
+    "@trpc/server": "^10.0.0-proxy-beta.10",
+    "@types/node": "^18.7.23",
     "@types/pluralize": "^0.0.29",
-    "prisma": "^4.3.1",
-    "trpc-shield": "^0.1.1",
-    "typescript": "^4.8.2"
+    "prisma": "^4.4.0",
+    "typescript": "^4.8.4"
   }
 }

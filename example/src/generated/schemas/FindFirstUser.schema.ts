@@ -5,6 +5,7 @@ import {
   UserOrderByWithRelationInputObjectSchema,
   UserWhereUniqueInputObjectSchema,
   UserSelectObjectSchema,
+  UserIncludeObjectSchema,
 } from './objects';
 
 export const FindFirstUserSchema = z
@@ -21,5 +22,6 @@ export const FindFirstUserSchema = z
     skip: z.number().optional(),
     distinct: UserScalarFieldEnumSchema.array().optional(),
     select: z.lazy(() => UserSelectObjectSchema).optional(),
+    include: z.lazy(() => UserIncludeObjectSchema).optional(),
   })
   .strict();
