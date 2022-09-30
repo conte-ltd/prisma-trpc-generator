@@ -2,7 +2,6 @@ import { EnvValue, GeneratorOptions } from '@prisma/generator-helper';
 import { getDMMF, parseEnvValue } from '@prisma/internals';
 import { promises as fs } from 'fs';
 import path from 'path';
-import pluralize from 'pluralize';
 import { configSchema } from './config';
 import {
   generateProcedureImport,
@@ -11,6 +10,7 @@ import {
   generateRouterSchemaImports,
   getInputTypeByOpName,
   generateInitTRPCImport,
+  generateRouterExport,
 } from './helpers';
 import { project } from './project';
 import removeDir from './utils/removeDir';
@@ -50,13 +50,14 @@ export async function generate(options: GeneratorOptions) {
     { overwrite: true },
   );
 
+  generateInitTRPCImport(appRouter, config);
+
   const modelRouters: string[] = [];
 
   prismaClientDmmf.mappings.modelOperations.forEach((modelOperation) => {
     const { model, ...operations } = modelOperation;
-    const plural = pluralize(model.toLowerCase());
+    const lowerCamelCaseModel = uncapitalizeFirstLetter(model);
     const hasCreateMany = Boolean(operations.createMany);
-    generateRouterImport(appRouter, plural, model);
     const modelRouter = project.createSourceFile(
       path.resolve(outputDir, `${model}.router.ts`),
       undefined,
@@ -90,7 +91,7 @@ export async function generate(options: GeneratorOptions) {
     }
 
     modelRouter.addStatements(/* ts */ `
-    export const ${plural}Router = ${config.initTRPCName}.router({
+    export const ${lowerCamelCaseModel}Router = ${config.initTRPCName}.router({
       ${modelRouter
         .getVariableDeclarations()
         .map((declaretion) => declaretion.getName())
@@ -99,10 +100,11 @@ export async function generate(options: GeneratorOptions) {
 
     modelRouter.formatText({ indentSize: 2 });
 
-    modelRouters.push(`${plural}: ${plural}Router`);
-  });
+    modelRouters.push(`${lowerCamelCaseModel}: ${lowerCamelCaseModel}Router`);
 
-  generateInitTRPCImport(appRouter, config);
+    generateRouterImport(appRouter, lowerCamelCaseModel, model);
+    generateRouterExport(appRouter, lowerCamelCaseModel, model);
+  });
 
   appRouter.addStatements(/* ts */ `
   export const appRouter = ${config.initTRPCName}.router({

@@ -4,12 +4,23 @@ import { uncapitalizeFirstLetter } from './utils/uncapitalizeFirstLetter';
 
 export const generateRouterImport = (
   sourceFile: SourceFile,
-  modelNamePlural: string,
+  modelNameLowerCamelCase: string,
   modelNameCamelCase: string,
 ) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: `./${modelNameCamelCase}.router`,
-    namedImports: [`${modelNamePlural}Router`],
+    namedImports: [`${modelNameLowerCamelCase}Router`],
+  });
+};
+
+export const generateRouterExport = (
+  sourceFile: SourceFile,
+  modelNameLowerCamelCase: string,
+  modelNameCamelCase: string,
+) => {
+  sourceFile.addExportDeclaration({
+    moduleSpecifier: `./${modelNameCamelCase}.router`,
+    namedExports: [`${modelNameLowerCamelCase}Router`],
   });
 };
 

@@ -1,5 +1,17 @@
-import { t, procedure } from "../../trpc";
-import { FindUniqueUserSchema, FindFirstUserSchema, FindManyUserSchema, CreateOneUserSchema, DeleteOneUserSchema, UpdateOneUserSchema, DeleteManyUserSchema, UpdateManyUserSchema, UpsertOneUserSchema, AggregateUserSchema, GroupByUserSchema } from "../schemas";
+import { t, procedure } from '../../trpc';
+import {
+  FindUniqueUserSchema,
+  FindFirstUserSchema,
+  FindManyUserSchema,
+  CreateOneUserSchema,
+  DeleteOneUserSchema,
+  UpdateOneUserSchema,
+  DeleteManyUserSchema,
+  UpdateManyUserSchema,
+  UpsertOneUserSchema,
+  AggregateUserSchema,
+  GroupByUserSchema,
+} from '../schemas';
 
 const aggregate = procedure
   .input(AggregateUserSchema)
@@ -57,7 +69,7 @@ const upsertOne = procedure
     return ctx.prisma.user.upsert(input);
   });
 
-export const usersRouter = t.router({
+export const userRouter = t.router({
   aggregate,
   createOne,
   deleteMany,
@@ -68,5 +80,5 @@ export const usersRouter = t.router({
   groupBy,
   updateMany,
   updateOne,
-  upsertOne
-})
+  upsertOne,
+});

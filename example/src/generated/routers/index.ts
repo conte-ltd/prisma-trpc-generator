@@ -1,8 +1,11 @@
-import { usersRouter } from "./User.router";
-import { postsRouter } from "./Post.router";
 import { t } from "../../trpc";
+import { userRouter } from "./User.router";
+import { postRouter } from "./Post.router";
+
+export { userRouter } from "./User.router";
+export { postRouter } from "./Post.router";
 
 export const appRouter = t.router({
-  users: usersRouter,
-  posts: postsRouter
+  user: userRouter,
+  post: postRouter
 })
