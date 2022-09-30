@@ -177,7 +177,7 @@
   dependencies:
     "@prisma/debug" "4.4.0"
 
-"@prisma/internals@^4.3.1":
+"@prisma/internals@^4.3.1", "@prisma/internals@^4.4.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@prisma/internals/-/internals-4.4.0.tgz#1bcb3dfb1e355153242b31426217b5e3fa34e835"
   integrity sha512-DvJ78z+HI6+5qA4SSHS/BRxR8m0aTIpJIhBbV/cY6m6kYgOvBjuf9slp+MqHpRR28eC5rgOS+e0DlN/tU+cxLg==

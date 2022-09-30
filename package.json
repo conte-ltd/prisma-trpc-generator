@@ -1,6 +1,6 @@
 {
   "name": "@conte-ltd/prisma-trpc-generator",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Prisma 2+ generator to emit fully implemented tRPC routers",
   "repository": "https://github.com/conte-ltd/prisma-trpc-generator",
   "bin": {
@@ -27,6 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/generator-helper": "^4.4.0",
+    "@prisma/internals": "^4.4.0",
     "pluralize": "^8.0.0",
     "ts-morph": "^16.0.0",
     "tslib": "^2.4.0"
