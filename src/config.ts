@@ -5,6 +5,7 @@ export const configSchema = z.object({
   initTRPCName: z.string().default('t'),
   procedureName: z.string().default('procedure'),
   schemaPath: z.string().optional(),
+  exportRouter: z.enum(['both', 'merged', 'partial']).default('both'),
 });
 
 export type Config = z.infer<typeof configSchema>;

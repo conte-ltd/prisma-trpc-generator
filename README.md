@@ -218,12 +218,13 @@ export const postsRouter = createRouter()
 
 # Additional Options
 
-| Option          | Description                                                | Type      | Default              |
-|-----------------|------------------------------------------------------------| --------- |----------------------|
-| `output`        | Output directory for the generated routers and zod schemas | `string`  | `./generated`        |
-| `initTRPCPath`  | Sets the init trpc path used in your routers               | `string`  | `.../../../src/trpc` |
-| `initTRPCName`  | Sets the init trpc name used in your routers               | `string`  | `t`                  |
-| `procedureName` | Sets the procedure name used in your routers               | `string`  | `procedure`          |
+| Option          | Description                                                | Type                         | Default              |
+|-----------------|------------------------------------------------------------|------------------------------|----------------------|
+| `output`        | Output directory for the generated routers and zod schemas | `string`                     | `./generated`        |
+| `initTRPCPath`  | Sets the init trpc path used in your routers               | `string`                     | `.../../../src/trpc` |
+| `initTRPCName`  | Sets the init trpc name used in your routers               | `string`                     | `t`                  |
+| `procedureName` | Sets the procedure name used in your routers               | `string`                     | `procedure`          |
+| `exportRouter`  | partial or merged routers                                  | `'both', 'marged', 'partal'` | `both`               |
 
 Example of `init trpc`
 

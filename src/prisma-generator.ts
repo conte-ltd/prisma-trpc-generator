@@ -50,7 +50,9 @@ export async function generate(options: GeneratorOptions) {
     { overwrite: true },
   );
 
-  generateInitTRPCImport(appRouter, config);
+  if (config.exportRouter === 'both' || config.exportRouter === 'merged') {
+    generateInitTRPCImport(appRouter, config);
+  }
 
   const modelRouters: string[] = [];
 
@@ -103,13 +105,18 @@ export async function generate(options: GeneratorOptions) {
     modelRouters.push(`${lowerCamelCaseModel}: ${lowerCamelCaseModel}Router`);
 
     generateRouterImport(appRouter, lowerCamelCaseModel, model);
-    generateRouterExport(appRouter, lowerCamelCaseModel, model);
+
+    if (config.exportRouter === 'both' || config.exportRouter === 'partial') {
+      generateRouterExport(appRouter, lowerCamelCaseModel);
+    }
   });
 
-  appRouter.addStatements(/* ts */ `
-  export const appRouter = ${config.initTRPCName}.router({
-    ${modelRouters.join(',\n')}
-  })`);
+  if (config.exportRouter === 'both' || config.exportRouter === 'merged') {
+    appRouter.addStatements(/* ts */ `
+    export const appRouter = ${config.initTRPCName}.router({
+      ${modelRouters.join(',\n')}
+    })`);
+  }
 
   appRouter.formatText({ indentSize: 2 });
   await project.save();

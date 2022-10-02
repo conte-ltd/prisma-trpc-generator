@@ -16,10 +16,8 @@ export const generateRouterImport = (
 export const generateRouterExport = (
   sourceFile: SourceFile,
   modelNameLowerCamelCase: string,
-  modelNameCamelCase: string,
 ) => {
   sourceFile.addExportDeclaration({
-    moduleSpecifier: `./${modelNameCamelCase}.router`,
     namedExports: [`${modelNameLowerCamelCase}Router`],
   });
 };

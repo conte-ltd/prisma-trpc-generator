@@ -1,17 +1,5 @@
-import { t, procedure } from '../../trpc';
-import {
-  FindUniqueUserSchema,
-  FindFirstUserSchema,
-  FindManyUserSchema,
-  CreateOneUserSchema,
-  DeleteOneUserSchema,
-  UpdateOneUserSchema,
-  DeleteManyUserSchema,
-  UpdateManyUserSchema,
-  UpsertOneUserSchema,
-  AggregateUserSchema,
-  GroupByUserSchema,
-} from '../schemas';
+import { t, procedure } from "../../trpc";
+import { FindUniqueUserSchema, FindFirstUserSchema, FindManyUserSchema, CreateOneUserSchema, DeleteOneUserSchema, UpdateOneUserSchema, DeleteManyUserSchema, UpdateManyUserSchema, UpsertOneUserSchema, AggregateUserSchema, GroupByUserSchema } from "../schemas";
 
 const aggregate = procedure
   .input(AggregateUserSchema)
@@ -80,5 +68,5 @@ export const userRouter = t.router({
   groupBy,
   updateMany,
   updateOne,
-  upsertOne,
-});
+  upsertOne
+})
